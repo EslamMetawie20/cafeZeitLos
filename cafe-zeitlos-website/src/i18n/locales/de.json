@@ -7,7 +7,13 @@
       "about": "Über uns",
       "gallery": "Galerie",
       "visit": "Besuch planen",
-      "language": "Sprache"
+      "language": "Sprache",
+      "highlights": "Highlights",
+      "login": "Anmelden",
+      "demo_login": "Demo-Login",
+      "admin_area": "Admin-Bereich",
+      "staff_area": "Mitarbeiter-Bereich",
+      "my_account": "Mein Konto"
     },
     "hero": {
       "subtitle": "Ankommen. Verweilen. Genießen.",
@@ -95,7 +101,16 @@
       "staff_desc": "Bestell-Queue, Reservierungen",
       "admin_title": "Admin testen",
       "admin_desc": "Voller Zugriff, KPIs, Settings",
-      "back_home": "Zurück zur Startseite"
+      "back_home": "Zurück zur Startseite",
+      "email": "E-Mail",
+      "password": "Passwort",
+      "show_password": "Passwort anzeigen",
+      "hide_password": "Passwort verbergen",
+      "submit": "Anmelden",
+      "test_admin": "Admin testen",
+      "test_staff": "Mitarbeiter testen",
+      "test_customer": "Kunde testen",
+      "back": "Zurück zur Website"
     },
     "dashboard": {
       "staff_title": "Bestellungen",

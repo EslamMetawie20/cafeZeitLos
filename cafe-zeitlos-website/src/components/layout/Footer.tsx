@@ -61,17 +61,17 @@ export const Footer: React.FC = () => {
             <h3 className="font-heading text-xl font-semibold mb-6 text-cafe-ivory">Links</h3>
             <ul className="space-y-3">
               <li>
-                <a href="#menu" className="text-sm opacity-90 hover:text-cafe-ivory transition-colors focus-visible:outline-none focus-visible:underline rounded">
+                <a href="#/menu" className="text-sm opacity-90 hover:text-cafe-ivory transition-colors focus-visible:outline-none focus-visible:underline rounded min-h-[44px] flex items-center">
                   {t('nav.menu')}
                 </a>
               </li>
               <li>
-                <a href="#about" className="text-sm opacity-90 hover:text-cafe-ivory transition-colors focus-visible:outline-none focus-visible:underline rounded">
+                <a href="#/about" className="text-sm opacity-90 hover:text-cafe-ivory transition-colors focus-visible:outline-none focus-visible:underline rounded min-h-[44px] flex items-center">
                   {t('nav.about')}
                 </a>
               </li>
               <li>
-                <a href="#gallery" className="text-sm opacity-90 hover:text-cafe-ivory transition-colors focus-visible:outline-none focus-visible:underline rounded">
+                <a href="#/gallery" className="text-sm opacity-90 hover:text-cafe-ivory transition-colors focus-visible:outline-none focus-visible:underline rounded min-h-[44px] flex items-center">
                   {t('nav.gallery')}
                 </a>
               </li>
@@ -82,13 +82,18 @@ export const Footer: React.FC = () => {
             <h3 className="font-heading text-xl font-semibold mb-6 text-cafe-ivory">Rechtliches</h3>
             <ul className="space-y-3">
               <li>
-                <a href="#" className="text-sm opacity-90 hover:text-cafe-ivory transition-colors focus-visible:outline-none focus-visible:underline rounded">
+                <a href="#" className="text-sm opacity-90 hover:text-cafe-ivory transition-colors focus-visible:outline-none focus-visible:underline rounded min-h-[44px] flex items-center">
                   {t('footer.imprint')}
                 </a>
               </li>
               <li>
-                <a href="#" className="text-sm opacity-90 hover:text-cafe-ivory transition-colors focus-visible:outline-none focus-visible:underline rounded">
+                <a href="#" className="text-sm opacity-90 hover:text-cafe-ivory transition-colors focus-visible:outline-none focus-visible:underline rounded min-h-[44px] flex items-center">
                   {t('footer.privacy')}
+                </a>
+              </li>
+              <li>
+                <a href="#/login" className="text-sm opacity-90 hover:text-cafe-ivory transition-colors focus-visible:outline-none focus-visible:underline rounded min-h-[44px] flex items-center">
+                  {t('nav.demo_login')}
                 </a>
               </li>
             </ul>

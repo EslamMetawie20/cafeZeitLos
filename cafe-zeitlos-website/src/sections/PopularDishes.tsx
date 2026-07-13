@@ -11,7 +11,7 @@ export const PopularDishes: React.FC = () => {
   const popularDishes = menuData.filter(item => item.popular).slice(0, 6);
 
   return (
-    <section id="popular" className="py-24 bg-cafe-cream/30">
+    <section id="highlights" className="py-24 bg-cafe-cream/30">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div>
@@ -22,7 +22,7 @@ export const PopularDishes: React.FC = () => {
           </div>
           <Button 
             variant="outline" 
-            onClick={() => document.getElementById('menu')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => window.location.hash = '#/menu'}
           >
             {t('popular.view_all')}
           </Button>

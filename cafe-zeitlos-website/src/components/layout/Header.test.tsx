@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import { Header } from './Header';
+import { MemoryRouter } from 'react-router-dom';
 
 // Mock react-i18next
 const changeLanguageMock = vi.fn();
@@ -14,10 +15,17 @@ vi.mock('react-i18next', () => ({
   }),
 }));
 
+vi.mock('../../contexts/AuthContext', () => ({
+  useAuth: () => ({ user: null })
+}));
 
 describe('Header Component', () => {
   it('toggles mobile menu', () => {
-    render(<Header />);
+    render(
+      <MemoryRouter>
+        <Header />
+      </MemoryRouter>
+    );
     const toggleBtn = screen.getByLabelText('Toggle Menu');
     
     // Initial: menu is closed (nav links inside mobile menu are absent)
@@ -33,7 +41,11 @@ describe('Header Component', () => {
   });
 
   it('switches language', () => {
-    render(<Header />);
+    render(
+      <MemoryRouter>
+        <Header />
+      </MemoryRouter>
+    );
     
     // The language button in desktop nav
     const langBtns = screen.getAllByLabelText('nav.language');

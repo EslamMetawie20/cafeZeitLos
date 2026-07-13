@@ -7,7 +7,13 @@
       "about": "About Us",
       "gallery": "Gallery",
       "visit": "Plan Visit",
-      "language": "Language"
+      "language": "Language",
+      "highlights": "Highlights",
+      "login": "Sign in",
+      "demo_login": "Demo login",
+      "admin_area": "Admin area",
+      "staff_area": "Staff area",
+      "my_account": "My account"
     },
     "hero": {
       "subtitle": "Arrive. Linger. Enjoy.",
@@ -94,8 +100,17 @@
       "staff_title": "Test Staff",
       "staff_desc": "Order queue, reservations",
       "admin_title": "Test Admin",
-      "admin_desc": "Full access, KPIs, settings",
-      "back_home": "Back to Home"
+      "admin_desc": "Full access, KPIs, Settings",
+      "back_home": "Back to Home",
+      "email": "Email",
+      "password": "Password",
+      "show_password": "Show password",
+      "hide_password": "Hide password",
+      "submit": "Sign in",
+      "test_admin": "Test Admin",
+      "test_staff": "Test Staff",
+      "test_customer": "Test Customer",
+      "back": "Back to website"
     },
     "dashboard": {
       "staff_title": "Orders",

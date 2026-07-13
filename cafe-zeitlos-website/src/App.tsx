@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 // Layouts
 import { PublicLayout } from './components/layout/PublicLayout';
@@ -24,7 +24,7 @@ import { StaffDashboard } from './pages/staff/StaffDashboard';
 // Customer Pages
 import { CustomerDashboard } from './pages/customer/CustomerDashboard';
 
-function AppRoutes() {
+export function AppRoutes() {
   return (
     <Routes>
       {/* Public Routes */}
@@ -76,9 +76,9 @@ function AppRoutes() {
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <AppRoutes />
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
