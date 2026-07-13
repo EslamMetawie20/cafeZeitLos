@@ -13,6 +13,8 @@ export const Header: React.FC = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
 
+  const [activeHash, setActiveHash] = useState<string>('');
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -21,16 +23,56 @@ export const Header: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Intersection Observer for active sections
   useEffect(() => {
-    if (location.hash === '#highlights') {
-      setTimeout(() => {
-        const element = document.getElementById('highlights');
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // Find all intersecting entries
+        const visibleEntries = entries.filter(entry => entry.isIntersecting);
+        
+        if (visibleEntries.length > 0) {
+          // Sort by intersection ratio (most visible first), or by vertical position
+          visibleEntries.sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+          const id = visibleEntries[0].target.id;
+          if (id === 'home-hero') {
+            setActiveHash('');
+          } else if (id) {
+            setActiveHash(`#${id}`);
+          }
         }
-      }, 100);
-    } else {
-      window.scrollTo(0, 0);
+      },
+      { rootMargin: '-100px 0px -40% 0px', threshold: [0, 0.25, 0.5, 0.75, 1] }
+    );
+
+    const sectionIds = ['home-hero', 'speisekarte', 'highlights', 'galerie', 'ueber-uns', 'besuch-planen'];
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, [location.pathname]);
+
+  // Robust scrolling
+  useEffect(() => {
+    if (location.pathname === '/' && location.hash) {
+      const id = location.hash.replace('#', '');
+      const element = document.getElementById(id);
+      if (element) {
+        // Smooth scroll considering header height
+        const headerOffset = 80; // approximate header height
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.scrollY - headerOffset;
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+        });
+      }
+    } else if (location.pathname === '/' && !location.hash) {
+      window.scrollTo({
+        top: 0,
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+      });
     }
   }, [location]);
 
@@ -42,23 +84,18 @@ export const Header: React.FC = () => {
   const handleNavClick = (path: string, hash?: string) => {
     setMobileMenuOpen(false);
     if (hash) {
-      if (location.pathname === path) {
-        // already on the page, just update hash or scroll
-        navigate(`${path}${hash}`);
-      } else {
-        navigate(`${path}${hash}`);
-      }
+      navigate(`${path}${hash}`);
     } else {
       navigate(path);
     }
   };
 
   const navLinks = [
-    { name: t('nav.menu'), path: '/menu' },
+    { name: t('nav.menu'), path: '/', hash: '#speisekarte' },
     { name: t('nav.highlights'), path: '/', hash: '#highlights' },
-    { name: t('nav.gallery'), path: '/gallery' },
-    { name: t('nav.about'), path: '/about' },
-    { name: t('nav.visit'), path: '/visit' },
+    { name: t('nav.gallery'), path: '/', hash: '#galerie' },
+    { name: t('nav.about'), path: '/', hash: '#ueber-uns' },
+    { name: t('nav.visit'), path: '/', hash: '#besuch-planen' },
   ];
 
   const getLoginText = () => {
@@ -92,9 +129,7 @@ export const Header: React.FC = () => {
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
             {navLinks.map((link) => {
-              const isActive = link.hash 
-                ? location.pathname === link.path && location.hash === link.hash
-                : location.pathname === link.path && !location.hash;
+              const isActive = location.pathname === '/' && activeHash === link.hash;
 
               return (
                 <button 
@@ -145,15 +180,18 @@ export const Header: React.FC = () => {
             className="absolute top-full left-0 w-full bg-cafe-ivory shadow-lg border-t border-cafe-cream lg:hidden overflow-hidden"
           >
             <nav className="flex flex-col p-4">
-              {navLinks.map((link) => (
-                <button 
-                  key={link.name} 
-                  onClick={() => handleNavClick(link.path, link.hash)}
-                  className="py-4 text-lg font-medium text-cafe-text border-b border-cafe-cream last:border-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-gold rounded px-2 text-left flex items-center min-h-[44px]"
-                >
-                  {link.name}
-                </button>
-              ))}
+              {navLinks.map((link) => {
+                const isActive = location.pathname === '/' && activeHash === link.hash;
+                return (
+                  <button 
+                    key={link.name} 
+                    onClick={() => handleNavClick(link.path, link.hash)}
+                    className={`py-4 text-lg font-medium border-b border-cafe-cream last:border-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-gold rounded px-2 text-left flex items-center min-h-[44px] ${isActive ? 'text-cafe-terracotta underline' : 'text-cafe-text'}`}
+                  >
+                    {link.name}
+                  </button>
+                );
+              })}
               
               <Link
                 to={getLoginPath()}

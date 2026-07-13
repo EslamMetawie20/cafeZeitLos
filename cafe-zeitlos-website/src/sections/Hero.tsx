@@ -10,7 +10,7 @@ export const Hero: React.FC = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="relative min-h-[100svh] flex flex-col justify-center pt-24 pb-16 overflow-hidden">
+    <section id="home-hero" className="relative min-h-[100svh] flex flex-col justify-center pt-24 pb-16 overflow-hidden">
       <div className="container mx-auto px-4 md:px-6 flex-1 flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
         
         {/* Text Content */}
@@ -41,7 +41,18 @@ export const Hero: React.FC = () => {
           <div className="flex flex-col sm:flex-row w-full sm:w-auto gap-4 mb-10">
             <Button 
               size="lg" 
-              onClick={() => document.getElementById('menu')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => {
+                const el = document.getElementById('speisekarte');
+                if (el) {
+                  const headerOffset = 80;
+                  const elementPosition = el.getBoundingClientRect().top;
+                  const offsetPosition = elementPosition + window.scrollY - headerOffset;
+                  window.scrollTo({
+                    top: offsetPosition,
+                    behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+                  });
+                }
+              }}
             >
               {t('hero.cta_menu')}
             </Button>

@@ -28,23 +28,49 @@ describe('App Routing', () => {
     );
   };
 
-  it('renders GalleryPage on /gallery', () => {
-    renderWithRoute('/gallery');
-    expect(screen.getAllByText('gallery.title')[0]).toBeInTheDocument();
-  });
-
-  it('renders AboutPage on /about', () => {
-    renderWithRoute('/about');
-    expect(screen.getAllByText('about.title')[0]).toBeInTheDocument();
-  });
-
-  it('renders VisitPage on /visit', () => {
-    renderWithRoute('/visit');
-    expect(screen.getAllByText('visit.title')[0]).toBeInTheDocument();
-  });
-
   it('renders LoginPage on /login', () => {
     renderWithRoute('/login');
     expect(screen.getAllByText('nav.demo_login')[0]).toBeInTheDocument();
+  });
+
+  it('shows Hero first on / and not the menu', () => {
+    const { container } = render(
+      <MemoryRouter initialEntries={['/']}>
+        <AuthProvider>
+          <CartProvider>
+            <AppRoutes />
+          </CartProvider>
+        </AuthProvider>
+      </MemoryRouter>
+    );
+    
+    // Check order of elements in DOM
+    const sections = container.querySelectorAll('section');
+    expect(sections[0].id).toBe('home-hero');
+    expect(sections[1].id).toBe('menu'); // FullMenu uses id="menu" internally
+    expect(sections[2].id).toBe('highlights');
+    expect(sections[3].id).toBe('gallery');
+    expect(sections[4].id).toBe('about');
+    expect(sections[5].id).toBe('visit');
+  });
+
+  it('contains correct Hero text', () => {
+    renderWithRoute('/');
+    // Since react-i18next is mocked to return the translation key, we assert on the key
+    expect(screen.getByText('hero.subtitle')).toBeInTheDocument();
+  });
+
+  it('/highlights redirects to real highlights section', () => {
+    const { container } = render(
+      <MemoryRouter initialEntries={['/highlights']}>
+        <AuthProvider>
+          <CartProvider>
+            <AppRoutes />
+          </CartProvider>
+        </AuthProvider>
+      </MemoryRouter>
+    );
+    // the redirect goes to /#highlights, rendering Home, which contains the highlights section
+    expect(container.querySelector('#highlights')).toBeInTheDocument();
   });
 });

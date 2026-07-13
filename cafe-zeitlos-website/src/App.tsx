@@ -9,10 +9,6 @@ import { RoleGuard } from './components/auth/RoleGuard';
 
 // Public Pages
 import { Home } from './pages/public/Home';
-import { MenuPage } from './pages/public/MenuPage';
-import { GalleryPage } from './pages/public/GalleryPage';
-import { AboutPage } from './pages/public/AboutPage';
-import { VisitPage } from './pages/public/VisitPage';
 import { Login } from './pages/public/Login';
 
 // Admin Pages
@@ -30,10 +26,14 @@ export function AppRoutes() {
       {/* Public Routes */}
       <Route element={<PublicLayout />}>
         <Route path="/" element={<Home />} />
-        <Route path="/menu" element={<MenuPage />} />
-        <Route path="/gallery" element={<GalleryPage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/visit" element={<VisitPage />} />
+        
+        {/* Legacy redirects to Home sections */}
+        <Route path="/menu" element={<Navigate to="/#speisekarte" replace />} />
+        <Route path="/highlights" element={<Navigate to="/#highlights" replace />} />
+        <Route path="/gallery" element={<Navigate to="/#galerie" replace />} />
+        <Route path="/about" element={<Navigate to="/#ueber-uns" replace />} />
+        <Route path="/visit" element={<Navigate to="/#besuch-planen" replace />} />
+        
         <Route path="/login" element={<Login />} />
       </Route>
 
