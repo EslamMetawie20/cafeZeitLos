@@ -7,7 +7,7 @@ import { AuthProvider } from '../../contexts/AuthContext';
 // Mock react-i18next
 vi.mock('react-i18next', () => ({
   useTranslation: () => ({
-    t: (key: string) => key,
+    t: (key: string, defaultValue?: string) => defaultValue || key,
     i18n: { language: 'de' }
   }),
 }));
@@ -22,13 +22,13 @@ describe('Login Component', () => {
       </MemoryRouter>
     );
     
-    expect(screen.getByLabelText('login.email')).toBeInTheDocument();
-    expect(screen.getByLabelText('login.password')).toBeInTheDocument();
-    expect(screen.getByText('login.submit')).toBeInTheDocument();
+    expect(screen.getByLabelText('E-Mail')).toBeInTheDocument();
+    expect(screen.getByLabelText('Passwort')).toBeInTheDocument();
+    expect(screen.getByText('Anmelden')).toBeInTheDocument();
     
-    expect(screen.getByText('login.customer_title')).toBeInTheDocument();
-    expect(screen.getByText('login.staff_title')).toBeInTheDocument();
-    expect(screen.getByText('login.admin_title')).toBeInTheDocument();
+    expect(screen.getByText('Kunde')).toBeInTheDocument();
+    expect(screen.getByText('Mitarbeiter')).toBeInTheDocument();
+    expect(screen.getByText('Admin')).toBeInTheDocument();
   });
 
   it('autofills admin credentials when admin test button is clicked', () => {
@@ -40,10 +40,10 @@ describe('Login Component', () => {
       </MemoryRouter>
     );
 
-    const emailInput = screen.getByLabelText('login.email') as HTMLInputElement;
-    const passwordInput = screen.getByLabelText('login.password') as HTMLInputElement;
+    const emailInput = screen.getByLabelText('E-Mail') as HTMLInputElement;
+    const passwordInput = screen.getByLabelText('Passwort') as HTMLInputElement;
     
-    fireEvent.click(screen.getByText('login.admin_title'));
+    fireEvent.click(screen.getByText('Admin'));
     
     expect(emailInput.value).toBe('admin@cafezeitlos.demo');
     expect(passwordInput.value).toBe('Admin123!');
@@ -58,10 +58,10 @@ describe('Login Component', () => {
       </MemoryRouter>
     );
 
-    const emailInput = screen.getByLabelText('login.email') as HTMLInputElement;
-    const passwordInput = screen.getByLabelText('login.password') as HTMLInputElement;
+    const emailInput = screen.getByLabelText('E-Mail') as HTMLInputElement;
+    const passwordInput = screen.getByLabelText('Passwort') as HTMLInputElement;
     
-    fireEvent.click(screen.getByText('login.staff_title'));
+    fireEvent.click(screen.getByText('Mitarbeiter'));
     
     expect(emailInput.value).toBe('mitarbeiter@cafezeitlos.demo');
     expect(passwordInput.value).toBe('Team123!');
@@ -76,10 +76,10 @@ describe('Login Component', () => {
       </MemoryRouter>
     );
 
-    const emailInput = screen.getByLabelText('login.email') as HTMLInputElement;
-    const passwordInput = screen.getByLabelText('login.password') as HTMLInputElement;
+    const emailInput = screen.getByLabelText('E-Mail') as HTMLInputElement;
+    const passwordInput = screen.getByLabelText('Passwort') as HTMLInputElement;
     
-    fireEvent.click(screen.getByText('login.customer_title'));
+    fireEvent.click(screen.getByText('Kunde'));
     
     expect(emailInput.value).toBe('kunde@cafezeitlos.demo');
     expect(passwordInput.value).toBe('Kunde123!');

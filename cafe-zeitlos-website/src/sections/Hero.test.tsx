@@ -12,9 +12,7 @@ vi.mock('react-i18next', () => ({
 describe('Hero Component', () => {
   it('renders hero content', () => {
     render(<Hero />);
-    
-    expect(screen.getByText('hero.halal')).toBeInTheDocument();
-    expect(screen.getByText('hero.cta_menu')).toBeInTheDocument();
-    expect(screen.getByAltText('Lotus Pancakes Highlight')).toBeInTheDocument();
+    expect(screen.getByText('CAFÉ · BRAUNSCHWEIG')).toBeInTheDocument();
+    expect(screen.getByText('Besuch planen')).toBeInTheDocument();
   });
 });

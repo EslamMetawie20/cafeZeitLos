@@ -57,7 +57,7 @@ describe('App Routing', () => {
   it('contains correct Hero text', () => {
     renderWithRoute('/');
     // Since react-i18next is mocked to return the translation key, we assert on the key
-    expect(screen.getByText('hero.subtitle')).toBeInTheDocument();
+    expect(screen.getByText('CAFÉ · BRAUNSCHWEIG')).toBeInTheDocument();
   });
 
   it('/highlights redirects to real highlights section', () => {
