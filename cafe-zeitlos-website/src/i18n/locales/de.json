@@ -1,0 +1,90 @@
+{
+  "translation": {
+    "nav": {
+      "home": "Start",
+      "menu": "Speisekarte",
+      "popular": "Highlights",
+      "about": "Über uns",
+      "gallery": "Galerie",
+      "visit": "Besuch planen",
+      "language": "Sprache"
+    },
+    "hero": {
+      "subtitle": "Ankommen. Verweilen. Genießen.",
+      "description": "Deine genussvolle Auszeit am Rebenring. Frühstück, Stullen, Bowls, Burger und Pancakes in Braunschweig.",
+      "halal": "Fleisch 100 % halal",
+      "hours": "Mo–So · 9–20 Uhr",
+      "cta_menu": "Speisekarte entdecken",
+      "cta_route": "Route öffnen",
+      "cta_call": "Jetzt anrufen"
+    },
+    "quickInfo": {
+      "halal": "Fleisch 100 % halal",
+      "hours": "Mo–So 9–20 Uhr",
+      "address": "Rebenring 47a, Braunschweig",
+      "highlights": "Frühstück, Stullen und Pancakes"
+    },
+    "popular": {
+      "title": "Beliebte Gerichte",
+      "view_all": "Gesamte Speisekarte ansehen"
+    },
+    "menu": {
+      "title": "Unsere Speisekarte",
+      "search_placeholder": "Gericht suchen...",
+      "filter_all": "Alle",
+      "filter_popular": "Beliebt",
+      "filter_vegetarian": "Vegetarisch",
+      "filter_vegan": "Vegan",
+      "reset_filters": "Filter zurücksetzen",
+      "no_results": "Keine Gerichte gefunden.",
+      "needs_confirmation": "Preis prüfen",
+      "demo_notice": "Konzept-Demo: Preise und Verfügbarkeit bitte vor Veröffentlichung durch Café Zeitlos bestätigen."
+    },
+    "gallery": {
+      "title": "Atmosphäre"
+    },
+    "about": {
+      "title": "Über Café Zeitlos",
+      "text": "Café Zeitlos ist ein Ort zum Ankommen, Genießen und Verweilen. Am Rebenring in Braunschweig treffen reichhaltige Frühstücksideen, herzhafte Stullen, Bowls, Burger und süße Highlights auf eine warme, moderne Atmosphäre."
+    },
+    "visit": {
+      "title": "Besuch planen",
+      "address": "Rebenring 47a, 38106 Braunschweig",
+      "phone": "+49 531 12885768",
+      "hours_title": "Öffnungszeiten",
+      "hours_text": "Montag bis Sonntag, 09:00–20:00 Uhr"
+    },
+    "reservation": {
+      "title": "Reservierungsanfrage",
+      "date": "Datum",
+      "time": "Uhrzeit",
+      "guests": "Anzahl Personen",
+      "name": "Dein Name",
+      "note": "Optionale Notiz",
+      "submit": "Anfrage erstellen",
+      "summary_title": "Deine Anfrage",
+      "copy": "Angaben kopieren",
+      "disclaimer": "Dies ist noch keine bestätigte Reservierung. Bitte kontaktiere das Café zur Bestätigung."
+    },
+    "faq": {
+      "title": "Häufige Fragen",
+      "q1": "Wo befindet sich Café Zeitlos?",
+      "a1": "Wir befinden uns am Rebenring 47a in 38106 Braunschweig.",
+      "q2": "Wann ist das Café geöffnet?",
+      "a2": "Wir haben täglich von Montag bis Sonntag zwischen 09:00 und 20:00 Uhr geöffnet.",
+      "q3": "Ist das Fleisch halal?",
+      "a3": "Café Zeitlos gibt an, dass das verwendete Fleisch zu 100 % halal ist. Für Fragen zu einzelnen Zutaten oder Allergenen wende dich bitte direkt an das Team.",
+      "q4": "Wie kann ich reservieren?",
+      "a4": "Nutze unseren Planer auf der Website, um deine Anfrage zu formulieren, und ruf uns dann an oder schreibe uns auf Instagram.",
+      "q5": "Kann ich Essen bestellen?",
+      "a5": "Ja, wir sind auf Wolt verfügbar. (Prüfe die aktuellen Liefergebiete direkt auf der Plattform).",
+      "q6": "Wo finde ich aktuelle Neuigkeiten?",
+      "a6": "Folge uns auf Instagram unter @cafezeitlos_bs für alle Updates."
+    },
+    "footer": {
+      "imprint": "Impressum (Platzhalter)",
+      "privacy": "Datenschutz (Platzhalter)",
+      "concept": "Konzept-Website"
+    }
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "translation": {
+    "nav": {
+      "home": "Home",
+      "menu": "Menu",
+      "popular": "Highlights",
+      "about": "About Us",
+      "gallery": "Gallery",
+      "visit": "Plan Visit",
+      "language": "Language"
+    },
+    "hero": {
+      "subtitle": "Arrive. Linger. Enjoy.",
+      "description": "Your delightful break at Rebenring. Breakfast, sandwiches, bowls, burgers and pancakes in Braunschweig.",
+      "halal": "Meat 100% halal",
+      "hours": "Mon–Sun · 9am–8pm",
+      "cta_menu": "Discover Menu",
+      "cta_route": "Get Directions",
+      "cta_call": "Call Now"
+    },
+    "quickInfo": {
+      "halal": "Meat 100% halal",
+      "hours": "Mon–Sun 9am–8pm",
+      "address": "Rebenring 47a, Braunschweig",
+      "highlights": "Breakfast, Sandwiches & Pancakes"
+    },
+    "popular": {
+      "title": "Popular Dishes",
+      "view_all": "View Full Menu"
+    },
+    "menu": {
+      "title": "Our Menu",
+      "search_placeholder": "Search dishes...",
+      "filter_all": "All",
+      "filter_popular": "Popular",
+      "filter_vegetarian": "Vegetarian",
+      "filter_vegan": "Vegan",
+      "reset_filters": "Reset Filters",
+      "no_results": "No dishes found.",
+      "needs_confirmation": "Check Price",
+      "demo_notice": "Concept Demo: Prices and availability are subject to confirmation by Café Zeitlos."
+    },
+    "gallery": {
+      "title": "Atmosphere"
+    },
+    "about": {
+      "title": "About Café Zeitlos",
+      "text": "Café Zeitlos is a place to arrive, enjoy, and linger. Located at Rebenring in Braunschweig, rich breakfast ideas, savory sandwiches, bowls, burgers, and sweet highlights meet a warm, modern atmosphere."
+    },
+    "visit": {
+      "title": "Plan Your Visit",
+      "address": "Rebenring 47a, 38106 Braunschweig",
+      "phone": "+49 531 12885768",
+      "hours_title": "Opening Hours",
+      "hours_text": "Monday to Sunday, 09:00 AM – 08:00 PM"
+    },
+    "reservation": {
+      "title": "Reservation Request",
+      "date": "Date",
+      "time": "Time",
+      "guests": "Number of Guests",
+      "name": "Your Name",
+      "note": "Optional Note",
+      "submit": "Create Request",
+      "summary_title": "Your Request",
+      "copy": "Copy Details",
+      "disclaimer": "This is not a confirmed reservation. Please contact the cafe directly to confirm."
+    },
+    "faq": {
+      "title": "Frequent Questions",
+      "q1": "Where is Café Zeitlos located?",
+      "a1": "We are located at Rebenring 47a in 38106 Braunschweig.",
+      "q2": "When is the cafe open?",
+      "a2": "We are open daily from Monday to Sunday between 09:00 AM and 08:00 PM.",
+      "q3": "Is the meat halal?",
+      "a3": "Café Zeitlos states that the meat used is 100% halal. For questions regarding individual ingredients or allergens, please ask the team directly.",
+      "q4": "How can I reserve a table?",
+      "a4": "Use our planner on the website to draft your request, then call us or message us on Instagram.",
+      "q5": "Can I order food for delivery?",
+      "a5": "Yes, we are available on Wolt. (Check current delivery areas directly on the platform).",
+      "q6": "Where can I find the latest news?",
+      "a6": "Follow us on Instagram at @cafezeitlos_bs for all updates."
+    },
+    "footer": {
+      "imprint": "Imprint (Placeholder)",
+      "privacy": "Privacy (Placeholder)",
+      "concept": "Concept Website"
+    }
+  }
+}

@@ -1,0 +1,46 @@
+@import '@fontsource/cormorant-garamond/300.css';
+@import '@fontsource/cormorant-garamond/400.css';
+@import '@fontsource/cormorant-garamond/500.css';
+@import '@fontsource/cormorant-garamond/600.css';
+@import '@fontsource/cormorant-garamond/700.css';
+@import '@fontsource/manrope/300.css';
+@import '@fontsource/manrope/400.css';
+@import '@fontsource/manrope/500.css';
+@import '@fontsource/manrope/600.css';
+@import '@fontsource/manrope/700.css';
+
+@import "tailwindcss";
+
+@theme {
+  --color-cafe-ivory: #F7F2EA;
+  --color-cafe-cream: #EDE2D2;
+  --color-cafe-espresso: #2A211B;
+  --color-cafe-cocoa: #4A382D;
+  --color-cafe-olive: #74745C;
+  --color-cafe-terracotta: #A86445;
+  --color-cafe-gold: #C3A36A;
+  --color-cafe-text: #211B17;
+  
+  --font-heading: "Cormorant Garamond", serif;
+  --font-sans: "Manrope", sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-cafe-ivory text-cafe-text font-sans antialiased selection:bg-cafe-gold selection:text-cafe-ivory;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading tracking-tight;
+  }
+
+  [dir="rtl"] {
+    text-align: right;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
