@@ -28,7 +28,7 @@ const IMAGES = [
   { id: "mediterrane-stulle", photoId: "1475090169767-40ed8d18f67d" },
   { id: "gemuese-stulle", photoId: "1496116218417-1a781b1c416c" },
   { id: "french-toast", photoId: "1484723091791-009f52728cb1" },
-  { id: "pistachio-vanilla-toast", photoId: "1588195538326-c5b1e9f6f5b1" },
+  { id: "pistachio-vanilla-toast", photoId: "1565299585323-38d6b0865b47" },
   { id: "berry-french-toast", photoId: "1563805042-7684c8a9e9cf" },
   { id: "pancake-platte", photoId: "1554520735-0a6b8b6ce8b7" },
   { id: "pistachio-pancakes", photoId: "1565299585323-38d6b0865b47" },
@@ -53,7 +53,7 @@ const IMAGES = [
   { id: "chocolate-berry-croffle", photoId: "1506084868230-bb9d95c24759" },
   { id: "lotus-crunch-croffle", photoId: "1554520735-0a6b8b6ce8b7" },
   { id: "sweet-flame-croffle", photoId: "1484723091791-009f52728cb1" },
-  { id: "pistachio-dream", photoId: "1588195538326-c5b1e9f6f5b1" },
+  { id: "pistachio-dream", photoId: "1565299585323-38d6b0865b47" },
   { id: "acai-bowl", photoId: "1590165482129-1b8b27698780" },
   { id: "joghurt-bowl", photoId: "1488477181946-6428a0291777" },
   { id: "tropical-bowl", photoId: "1511690656952-34342bb7c2f2" }

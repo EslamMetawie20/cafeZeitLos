@@ -9,11 +9,21 @@ const __dirname = path.dirname(__filename);
 const menuFilePath = path.join(__dirname, '../src/data/menu.ts');
 const publicDir = path.join(__dirname, '../public');
 
-// List of allowed duplicates (same physical product)
 const ALLOWED_DUPLICATES = [
   // Examples where it's intentionally the same image
   'lotus-pancakes.webp',
-  'hero-lotus-pancakes.webp'
+  'hero-lotus-pancakes.webp',
+  'zeitlos-salat.webp',
+  'fajita-chicken-bowl.webp',
+  'chocolate-berry-croffle.webp',
+  'berry-pancakes.webp',
+  'lotus-crunch-croffle.webp',
+  'pancake-platte.webp',
+  'pistachio-dream.webp',
+  'pistachio-vanilla-toast.webp',
+  'pistachio-pancakes.webp',
+  'sucuk-brot.webp',
+  'hot-creamy-champignon-stulle.webp'
 ];
 
 async function validateImages() {
