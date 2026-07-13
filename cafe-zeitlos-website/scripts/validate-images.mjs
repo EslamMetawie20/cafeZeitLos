@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import crypto from 'crypto';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -7,6 +8,13 @@ const __dirname = path.dirname(__filename);
 
 const menuFilePath = path.join(__dirname, '../src/data/menu.ts');
 const publicDir = path.join(__dirname, '../public');
+
+// List of allowed duplicates (same physical product)
+const ALLOWED_DUPLICATES = [
+  // Examples where it's intentionally the same image
+  'lotus-pancakes.webp',
+  'hero-lotus-pancakes.webp'
+];
 
 async function validateImages() {
   console.log('Validating images...');
@@ -33,8 +41,7 @@ async function validateImages() {
   }
 
   let hasErrors = false;
-  const uniqueImages = new Set();
-  let placeholderCount = 0;
+  const fileHashes = new Map(); // hash -> first file path
 
   for (const imgPath of imagePaths) {
     if (!imgPath) {
@@ -43,11 +50,8 @@ async function validateImages() {
       continue;
     }
     
-    uniqueImages.add(imgPath);
-    
     if (imgPath.includes('placeholder')) {
       console.error(`❌ Placeholder image used: ${imgPath}`);
-      placeholderCount++;
       hasErrors = true;
     }
 
@@ -60,14 +64,25 @@ async function validateImages() {
       if (stats.size === 0) {
         console.error(`❌ Image file is empty: ${imgPath}`);
         hasErrors = true;
+      } else {
+        // Check for duplicates by file hash
+        const fileBuffer = fs.readFileSync(fullPath);
+        const hashSum = crypto.createHash('sha256');
+        hashSum.update(fileBuffer);
+        const hex = hashSum.digest('hex');
+
+        const fileName = path.basename(imgPath);
+        if (fileHashes.has(hex)) {
+          const original = fileHashes.get(hex);
+          if (!ALLOWED_DUPLICATES.includes(fileName) && !ALLOWED_DUPLICATES.includes(path.basename(original))) {
+            console.error(`❌ Duplicate image content found: ${imgPath} is identical to ${original}`);
+            hasErrors = true;
+          }
+        } else {
+          fileHashes.set(hex, imgPath);
+        }
       }
     }
-  }
-
-  // Check unique images ratio (heuristics)
-  if (uniqueImages.size < imagePaths.length * 0.5) {
-    console.error(`❌ Too many duplicate images used. Found only ${uniqueImages.size} unique images for ${imagePaths.length} items.`);
-    hasErrors = true;
   }
 
   // Check Hero Image
@@ -98,7 +113,7 @@ async function validateImages() {
     process.exit(1);
   }
 
-  console.log('✅ Image validation passed! All required images are present, non-empty, and not placeholders.');
+  console.log('✅ Image validation passed! All required images are unique, present, non-empty, and not placeholders.');
 }
 
 validateImages();

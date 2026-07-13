@@ -5,8 +5,7 @@ import { Search, X } from 'lucide-react';
 import { menuData } from '../data/menu';
 import { type MenuItem } from '../types';
 import { Dialog } from '../components/ui/Dialog';
-import { useCart } from '../contexts/CartContext';
-import { ShoppingBag } from 'lucide-react';
+import { Calendar } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 
 export const FullMenu: React.FC = () => {
@@ -15,16 +14,6 @@ export const FullMenu: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
-  const { addItem } = useCart();
-  const [added, setAdded] = useState(false);
-
-  const handleAddToCart = () => {
-    if (selectedItem) {
-      addItem(selectedItem, 1);
-      setAdded(true);
-      setTimeout(() => setAdded(false), 2000);
-    }
-  };
 
   const categories = ['all', 'popular', 'vegetarian', 'vegan', ...Array.from(new Set(menuData.map(item => item.category)))];
 
@@ -230,11 +219,14 @@ export const FullMenu: React.FC = () => {
                   <Button 
                     fullWidth 
                     size="lg"
-                    onClick={handleAddToCart}
+                    onClick={() => {
+                      setSelectedItem(null);
+                      document.getElementById('visit')?.scrollIntoView({ behavior: 'smooth' });
+                    }}
                     className="gap-2"
                   >
-                    <ShoppingBag size={20} />
-                    {added ? 'Hinzugefügt!' : 'Zur Bestellung hinzufügen'}
+                    <Calendar size={20} />
+                    {t('menu.reserve_table', 'Tisch reservieren')}
                   </Button>
                 </div>
               </div>
