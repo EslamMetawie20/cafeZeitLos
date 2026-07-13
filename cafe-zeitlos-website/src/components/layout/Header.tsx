@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Globe } from 'lucide-react';
@@ -18,7 +18,7 @@ export const Header: React.FC = () => {
   }, []);
 
   const toggleLanguage = () => {
-    const nextLang = i18n.language === 'de' ? 'en' : i18n.language === 'en' ? 'ar' : 'de';
+    const nextLang = i18n.language === 'de' ? 'en' : 'de';
     i18n.changeLanguage(nextLang);
   };
 
@@ -100,7 +100,7 @@ export const Header: React.FC = () => {
               <div className="py-4 flex justify-between items-center px-2 border-t border-cafe-cream mt-2">
                 <span className="text-lg font-medium text-cafe-text">{t('nav.language')}</span>
                 <div className="flex gap-4">
-                  {['de', 'en', 'ar'].map(lang => (
+                  {['de', 'en'].map(lang => (
                     <button
                       key={lang}
                       onClick={() => {

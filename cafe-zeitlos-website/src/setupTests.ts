@@ -1,6 +1,7 @@
+import React from 'react';
 import '@testing-library/jest-dom';
 import { vi } from 'vitest';
-import React from 'react';
+
 
 // Mock IntersectionObserver
 const IntersectionObserverMock = vi.fn(() => ({
@@ -26,6 +27,28 @@ Object.defineProperty(window, 'matchMedia', {
   })),
 });
 
+// Mock localStorage
+const localStorageMock = (function () {
+  let store: Record<string, string> = {};
+  return {
+    getItem: function (key: string) {
+      return store[key] || null;
+    },
+    setItem: function (key: string, value: string) {
+      store[key] = value.toString();
+    },
+    clear: function () {
+      store = {};
+    },
+    removeItem: function (key: string) {
+      delete store[key];
+    },
+  };
+})();
+Object.defineProperty(window, 'localStorage', {
+  value: localStorageMock,
+});
+
 // A robust framer-motion mock
 vi.mock('framer-motion', async () => {
   const actual = await vi.importActual('framer-motion');
@@ -34,17 +57,17 @@ vi.mock('framer-motion', async () => {
     return ({ children, ...props }: any) => {
       // Remove framer-motion specific props to prevent React warnings
       const {
-        initial,
-        animate,
-        exit,
-        transition,
-        whileInView,
-        whileHover,
-        whileTap,
-        viewport,
-        layout,
-        layoutId,
-        variants,
+        initial: _initial,
+        animate: _animate,
+        exit: _exit,
+        transition: _transition,
+        whileInView: _whileInView,
+        whileHover: _whileHover,
+        whileTap: _whileTap,
+        viewport: _viewport,
+        layout: _layout,
+        layoutId: _layoutId,
+        variants: _variants,
         ...validProps
       } = props;
       

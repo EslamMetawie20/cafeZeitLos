@@ -1,24 +1,34 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import { FullMenu } from './FullMenu';
+import { CartProvider } from '../contexts/CartContext';
 
 // Mock react-i18next
 vi.mock('react-i18next', () => ({
   useTranslation: () => ({
     t: (key: string) => key,
+    i18n: { language: 'de' }
   }),
 }));
 
 // Mock framer-motion to avoid animation delays in tests
 
+const renderWithProviders = (ui: React.ReactElement) => {
+  return render(
+    <CartProvider>
+      {ui}
+    </CartProvider>
+  );
+};
+
 describe('FullMenu Component', () => {
   it('renders menu title', () => {
-    render(<FullMenu />);
+    renderWithProviders(<FullMenu />);
     expect(screen.getByText('menu.title')).toBeInTheDocument();
   });
 
   it('filters menu by search', () => {
-    render(<FullMenu />);
+    renderWithProviders(<FullMenu />);
     const searchInput = screen.getByPlaceholderText('menu.search_placeholder');
     
     // Initial state has many items
@@ -33,7 +43,7 @@ describe('FullMenu Component', () => {
   });
 
   it('shows empty state when no results match', () => {
-    render(<FullMenu />);
+    renderWithProviders(<FullMenu />);
     const searchInput = screen.getByPlaceholderText('menu.search_placeholder');
     
     fireEvent.change(searchInput, { target: { value: 'XYZ123NONEXISTENT' } });
@@ -42,7 +52,7 @@ describe('FullMenu Component', () => {
   });
 
   it('filters by category (e.g. Vegetarian)', () => {
-    render(<FullMenu />);
+    renderWithProviders(<FullMenu />);
     
     const vegButton = screen.getByText('menu.filter_vegetarian');
     fireEvent.click(vegButton);
@@ -54,7 +64,7 @@ describe('FullMenu Component', () => {
   });
 
   it('opens and closes dialog on item click', () => {
-    render(<FullMenu />);
+    renderWithProviders(<FullMenu />);
     
     // Click on an item to open dialog
     const item = screen.getByText('Avocado Stulle');

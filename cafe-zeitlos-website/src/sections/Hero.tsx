@@ -1,8 +1,10 @@
-import React from 'react';
+
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { MapPin, Phone, ChevronDown } from 'lucide-react';
 import { Button } from '../components/ui/Button';
+
+import React from 'react';
 
 export const Hero: React.FC = () => {
   const { t } = useTranslation();
@@ -76,7 +78,7 @@ export const Hero: React.FC = () => {
           <div className="absolute inset-0 bg-cafe-cream rounded-[2.5rem] md:rounded-[4rem] transform rotate-3 scale-105 opacity-50"></div>
           <div className="absolute inset-0 rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl border-4 border-cafe-ivory bg-cafe-ivory">
             <img 
-              src="/images/placeholders/hero-lotus-pancakes.svg" 
+              src="/images/hero-main.webp" 
               alt="Lotus Pancakes Highlight" 
               className="w-full h-full object-cover"
               fetchPriority="high"
