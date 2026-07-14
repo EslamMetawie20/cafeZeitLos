@@ -122,7 +122,7 @@ export const FullMenu: React.FC = () => {
                 >
                   <div className="relative aspect-[4/3] overflow-hidden bg-cafe-cream">
                     <img 
-                      src={item.image} 
+                      src={`${import.meta.env.BASE_URL}${item.image.startsWith('/') ? item.image.slice(1) : item.image}`}
                       alt={item.imageAlt} 
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       loading="lazy"
@@ -174,7 +174,7 @@ export const FullMenu: React.FC = () => {
             <div>
               <div className="relative w-full aspect-[4/3] md:aspect-video bg-cafe-cream">
                 <img 
-                  src={selectedItem.image} 
+                  src={`${import.meta.env.BASE_URL}${selectedItem.image.startsWith('/') ? selectedItem.image.slice(1) : selectedItem.image}`}
                   alt={selectedItem.imageAlt} 
                   className="w-full h-full object-cover"
                 />

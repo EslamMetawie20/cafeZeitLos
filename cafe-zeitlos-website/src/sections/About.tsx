@@ -18,8 +18,8 @@ export const About: React.FC = () => {
           >
             <div className="relative aspect-[4/5] max-w-md mx-auto lg:mx-0 rounded-3xl overflow-hidden shadow-2xl border-4 border-cafe-cocoa bg-cafe-cocoa">
               <img 
-                src="/images/placeholders/hero-lotus-pancakes.svg" 
-                alt="Café Zeitlos" 
+                src={`${import.meta.env.BASE_URL}images/placeholders/hero-lotus-pancakes.svg`} 
+                alt="Café Zeitlos Atmosphäre" 
                 className="w-full h-full object-cover opacity-80 mix-blend-luminosity hover:mix-blend-normal transition-all duration-700"
                 loading="lazy"
               />

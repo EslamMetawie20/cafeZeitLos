@@ -94,7 +94,7 @@ export function CartWidget() {
               <div className="flex-1 overflow-y-auto p-6 space-y-6 bg-cream-50">
                 {items.map(item => (
                   <div key={item.id} className="flex gap-4 bg-white p-4 rounded-xl shadow-sm border border-warm-ivory-100">
-                    <img src={item.image} alt={item.name} className="w-20 h-20 object-cover rounded-lg bg-warm-ivory-100" />
+                    <img src={`${import.meta.env.BASE_URL}${item.image.startsWith('/') ? item.image.slice(1) : item.image}`} alt={item.name} className="w-20 h-20 object-cover rounded-lg bg-warm-ivory-100" />
                     <div className="flex-1 flex flex-col">
                       <div className="flex justify-between items-start mb-1">
                         <h4 className="font-bold text-espresso-900 line-clamp-1">{item.name}</h4>

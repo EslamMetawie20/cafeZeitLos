@@ -40,8 +40,7 @@ export const PopularDishes: React.FC = () => {
             >
               <div className="relative aspect-[4/3] overflow-hidden">
                 <img 
-                  src={dish.image} 
-                  alt={dish.imageAlt} 
+                  src={`${import.meta.env.BASE_URL}${dish.image.startsWith('/') ? dish.image.slice(1) : dish.image}`}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   loading="lazy"
                 />
