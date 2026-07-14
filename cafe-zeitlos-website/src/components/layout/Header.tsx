@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Globe, User } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
+import logoImage from '../../assets/logo.png';
 
 export const Header: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -121,9 +122,13 @@ export const Header: React.FC = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-gold rounded" onClick={() => setMobileMenuOpen(false)}>
-            <span className="font-heading text-2xl font-bold tracking-tight text-cafe-espresso">
-              Café Zeitlos
-            </span>
+            <div className="h-10 md:h-12 w-32 md:w-48 flex items-center justify-start overflow-visible">
+              <img 
+                src={logoImage} 
+                alt="Café Zeitlos Logo" 
+                className="w-full h-auto object-cover scale-[1.3] origin-left mix-blend-multiply transition-transform duration-300 hover:scale-[1.35]" 
+              />
+            </div>
           </Link>
 
           {/* Desktop Nav */}

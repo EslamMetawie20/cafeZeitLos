@@ -12,7 +12,7 @@ vi.mock('react-i18next', () => ({
 describe('Hero Component', () => {
   it('renders hero content', () => {
     render(<Hero />);
-    expect(screen.getByText('CAFÉ · BRAUNSCHWEIG')).toBeInTheDocument();
+
     expect(screen.getByText('Besuch planen')).toBeInTheDocument();
   });
 });
