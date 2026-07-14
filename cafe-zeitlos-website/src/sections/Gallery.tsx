@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { Camera } from 'lucide-react';
+import galleryDemo from '../assets/gallery-demo.png';
 
 export const Gallery: React.FC = () => {
   const { t } = useTranslation();
@@ -16,30 +16,20 @@ export const Gallery: React.FC = () => {
         </div>
 
         <motion.div 
-          className="max-w-3xl mx-auto flex flex-col items-center justify-center py-20 px-6 text-center border border-cafe-cream/60 rounded-[3rem] bg-cafe-cream/20 shadow-sm"
-          initial={{ opacity: 0, y: 20 }}
+          className="max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-2xl shadow-cafe-espresso/15 transition-all duration-700 hover:shadow-cafe-gold/20"
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="w-16 h-16 mb-6 rounded-full bg-cafe-gold/10 flex items-center justify-center text-cafe-gold"
-          >
-            <Camera size={28} strokeWidth={1.5} />
-          </motion.div>
-          
-          <h3 className="font-heading text-2xl md:text-3xl font-medium text-cafe-espresso mb-4">
-            Unsere Galerie wird aktuell neu gestaltet
-          </h3>
-          
-          <p className="text-lg text-cafe-text/80 max-w-xl text-balance leading-relaxed">
-            Hochwertige, echte Eindrücke aus unserem Café am Rebenring werden direkt nach unserem professionellen Fotoshooting hier ergänzt. 
-            Wir freuen uns darauf, dir bald die echte Atmosphäre des Café Zeitlos zu zeigen.
-          </p>
+          {/* Internal demo marker to indicate this is not yet a real photo */}
+          <img 
+            src={galleryDemo} 
+            alt="Café Zeitlos Atmosphäre" 
+            className="w-full h-[60vh] md:h-[70vh] lg:h-[80vh] object-cover transition-transform duration-1000 hover:scale-[1.03]"
+            data-demo="true"
+            loading="lazy"
+          />
         </motion.div>
       </div>
     </section>
