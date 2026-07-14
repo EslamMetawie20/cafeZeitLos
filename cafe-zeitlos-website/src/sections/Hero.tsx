@@ -4,7 +4,10 @@ import { Button } from '../components/ui/Button';
 
 import heroImage from '../assets/hero-coffee.png';
 
+import { useTranslation } from 'react-i18next';
+
 export const Hero: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <section id="home-hero" className="relative min-h-[100svh] flex flex-col justify-center pt-24 pb-16 overflow-hidden">
       <div className="container mx-auto px-4 md:px-6 flex-1 flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
@@ -19,13 +22,13 @@ export const Hero: React.FC = () => {
 
           
           <h1 className="font-heading text-5xl md:text-7xl lg:text-8xl font-bold leading-tight mb-6 text-cafe-espresso">
-            Ein Café für<br />
-            zeitlose<br />
-            Momente.
+            {t('hero.title_line1')}<br />
+            {t('hero.title_line2')}<br />
+            {t('hero.title_line3')}
           </h1>
           
           <p className="text-lg md:text-xl text-cafe-text opacity-90 max-w-lg mb-8 text-balance">
-            Handverlesener Kaffee, ehrliche Küche und ein Ort, an dem die Zeit langsamer läuft — mitten in Braunschweig.
+            {t('hero.description')}
           </p>
           
           <div className="flex flex-col sm:flex-row w-full sm:w-auto gap-4 mb-10">
@@ -44,7 +47,7 @@ export const Hero: React.FC = () => {
                 }
               }}
             >
-              Besuch planen
+              {t('hero.cta_visit')}
             </Button>
             <Button 
               variant="outline" 
@@ -63,22 +66,22 @@ export const Hero: React.FC = () => {
                 }
               }}
             >
-              Highlights entdecken
+              {t('hero.cta_highlights')}
             </Button>
           </div>
 
           <div className="flex flex-col gap-2 text-sm font-medium text-cafe-text/80">
             <div className="flex items-center gap-2">
               <MapPin size={18} className="text-cafe-terracotta" />
-              <span>Rebenring 47 A, Braunschweig</span>
+              <span>{t('hero.address')}</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-cafe-terracotta ml-1.5 mr-1"></span>
-              <span>Täglich 09 – 20 Uhr</span>
+              <span>{t('hero.hours')}</span>
             </div>
             <div className="flex items-center gap-2 mt-2">
               <span className="px-2 py-1 rounded-md bg-cafe-gold/10 text-cafe-gold border border-cafe-gold/20 text-xs">
-                Fleisch 100 % halal
+                {t('hero.halal')}
               </span>
             </div>
           </div>

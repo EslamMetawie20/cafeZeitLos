@@ -13,16 +13,19 @@
       "demo_login": "Demo login",
       "admin_area": "Admin area",
       "staff_area": "Staff area",
-      "my_account": "My account"
+      "my_account": "My account",
+      "switch_language": "Zu Deutsch wechseln"
     },
     "hero": {
-      "subtitle": "Arrive. Linger. Enjoy.",
-      "description": "Your delightful break at Rebenring. Breakfast, sandwiches, bowls, burgers and pancakes in Braunschweig.",
-      "halal": "Meat 100% halal",
-      "hours": "Mon–Sun · 9am–8pm",
-      "cta_menu": "Discover Menu",
-      "cta_route": "Get Directions",
-      "cta_call": "Call Now"
+      "title_line1": "A cafe for",
+      "title_line2": "timeless",
+      "title_line3": "moments.",
+      "description": "Handpicked coffee, honest food, and a place where time slows down — right in the heart of Braunschweig.",
+      "cta_visit": "Plan Visit",
+      "cta_highlights": "Discover Highlights",
+      "address": "Rebenring 47 A, Braunschweig",
+      "hours": "Daily 9am – 8pm",
+      "halal": "Meat 100% halal"
     },
     "quickInfo": {
       "halal": "Meat 100% halal",

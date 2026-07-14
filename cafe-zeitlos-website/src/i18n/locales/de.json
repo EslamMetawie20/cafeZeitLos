@@ -13,16 +13,19 @@
       "demo_login": "Demo-Login",
       "admin_area": "Admin-Bereich",
       "staff_area": "Mitarbeiter-Bereich",
-      "my_account": "Mein Konto"
+      "my_account": "Mein Konto",
+      "switch_language": "Switch to English"
     },
     "hero": {
-      "subtitle": "Ankommen. Verweilen. Genießen.",
-      "description": "Deine genussvolle Auszeit am Rebenring. Frühstück, Stullen, Bowls, Burger und Pancakes in Braunschweig.",
-      "halal": "Fleisch 100 % halal",
-      "hours": "Mo–So · 9–20 Uhr",
-      "cta_menu": "Speisekarte entdecken",
-      "cta_route": "Route öffnen",
-      "cta_call": "Jetzt anrufen"
+      "title_line1": "Ein Café für",
+      "title_line2": "zeitlose",
+      "title_line3": "Momente.",
+      "description": "Handverlesener Kaffee, ehrliche Küche und ein Ort, an dem die Zeit langsamer läuft — mitten in Braunschweig.",
+      "cta_visit": "Besuch planen",
+      "cta_highlights": "Highlights entdecken",
+      "address": "Rebenring 47 A, Braunschweig",
+      "hours": "Täglich 09 – 20 Uhr",
+      "halal": "Fleisch 100 % halal"
     },
     "quickInfo": {
       "halal": "Fleisch 100 % halal",

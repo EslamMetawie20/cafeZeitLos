@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Globe, User } from 'lucide-react';
+import { Menu, X, User } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import logoImage from '../../assets/logo.png';
@@ -148,11 +148,36 @@ export const Header: React.FC = () => {
             })}
             <button 
               onClick={toggleLanguage}
-              className="flex items-center gap-2 text-sm font-medium text-cafe-text hover:text-cafe-terracotta transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-gold rounded px-2 min-w-[44px] min-h-[44px]"
-              aria-label={t('nav.language')}
+              className="flex items-center justify-center text-sm font-medium text-cafe-text hover:text-cafe-terracotta transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-gold rounded min-w-[44px] min-h-[44px]"
+              aria-label={t('nav.switch_language')}
             >
-              <Globe size={18} />
-              <span className="uppercase">{i18n.language}</span>
+              <AnimatePresence mode="wait">
+                {i18n.language === 'de' ? (
+                  <motion.div
+                    key="en"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.15 }}
+                    className="flex items-center gap-1.5"
+                  >
+                    <span className="text-lg leading-none" aria-hidden="true">🇬🇧</span>
+                    <span className="uppercase">EN</span>
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="de"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.15 }}
+                    className="flex items-center gap-1.5"
+                  >
+                    <span className="text-lg leading-none" aria-hidden="true">🇩🇪</span>
+                    <span className="uppercase">DE</span>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </button>
             <Link 
               to={getLoginPath()}
@@ -209,20 +234,42 @@ export const Header: React.FC = () => {
               
               <div className="py-4 flex justify-between items-center px-2 border-t border-cafe-cream mt-2">
                 <span className="text-lg font-medium text-cafe-text min-h-[44px] flex items-center">{t('nav.language')}</span>
-                <div className="flex gap-4">
-                  {['de', 'en'].map(lang => (
-                    <button
-                      key={lang}
-                      onClick={() => {
-                        i18n.changeLanguage(lang);
-                        setMobileMenuOpen(false);
-                      }}
-                      className={`text-lg font-medium uppercase min-w-[44px] min-h-[44px] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-gold rounded ${i18n.language === lang ? 'text-cafe-terracotta underline' : 'text-cafe-text'}`}
-                    >
-                      {lang}
-                    </button>
-                  ))}
-                </div>
+                <button
+                  onClick={() => {
+                    toggleLanguage();
+                    setMobileMenuOpen(false);
+                  }}
+                  className="flex items-center justify-center text-lg font-medium text-cafe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-gold rounded min-w-[44px] min-h-[44px]"
+                  aria-label={t('nav.switch_language')}
+                >
+                  <AnimatePresence mode="wait">
+                    {i18n.language === 'de' ? (
+                      <motion.div
+                        key="en-mob"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.15 }}
+                        className="flex items-center gap-2"
+                      >
+                        <span className="text-2xl leading-none" aria-hidden="true">🇬🇧</span>
+                        <span className="uppercase">EN</span>
+                      </motion.div>
+                    ) : (
+                      <motion.div
+                        key="de-mob"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.15 }}
+                        className="flex items-center gap-2"
+                      >
+                        <span className="text-2xl leading-none" aria-hidden="true">🇩🇪</span>
+                        <span className="uppercase">DE</span>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </button>
               </div>
             </nav>
           </motion.div>
