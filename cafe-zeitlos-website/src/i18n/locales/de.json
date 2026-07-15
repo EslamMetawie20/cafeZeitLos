@@ -74,7 +74,20 @@
       "submit": "Anfrage erstellen",
       "summary_title": "Deine Anfrage",
       "copy": "Angaben kopieren",
-      "disclaimer": "Dies ist noch keine bestätigte Reservierung. Bitte kontaktiere das Café zur Bestätigung."
+      "disclaimer": "Dies ist noch keine bestätigte Reservierung. Bitte kontaktiere das Café zur Bestätigung.",
+      "disclaimer_generate": "Dies ist noch keine bestätigte Reservierung. Bitte kopiere deine Anfrage und kontaktiere das Café per Instagram oder Telefon, um deinen Tisch zu bestätigen.",
+      "summary": "Zusammenfassung",
+      "draft": "Entwurf",
+      "name_label": "Name",
+      "guests_label": "Gäste",
+      "guests_count": "{{count}} Personen",
+      "note_label": "Notiz",
+      "call": "Anrufen",
+      "copied": "Angaben kopiert!",
+      "edit": "Anfrage bearbeiten",
+      "time_value": "{{time}} Uhr",
+      "error_past_date": "Das Datum darf nicht in der Vergangenheit liegen.",
+      "error_invalid_time": "Die Uhrzeit muss innerhalb der Öffnungszeiten (09:00 - 20:00 Uhr) liegen."
     },
     "faq": {
       "title": "Häufige Fragen",

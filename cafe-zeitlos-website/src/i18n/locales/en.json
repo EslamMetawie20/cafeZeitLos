@@ -74,7 +74,20 @@
       "submit": "Create Request",
       "summary_title": "Your Request",
       "copy": "Copy Details",
-      "disclaimer": "This is not a confirmed reservation. Please contact the cafe directly to confirm."
+      "disclaimer": "This is not a confirmed reservation. Please contact the cafe directly to confirm.",
+      "disclaimer_generate": "This is not a confirmed reservation. Please copy your request details and contact the cafe via Instagram or phone to confirm your table.",
+      "summary": "Summary",
+      "draft": "Draft",
+      "name_label": "Name",
+      "guests_label": "Guests",
+      "guests_count": "{{count}} Guests",
+      "note_label": "Note",
+      "call": "Call Us",
+      "copied": "Details copied!",
+      "edit": "Edit request",
+      "time_value": "{{time}}",
+      "error_past_date": "The date cannot be in the past.",
+      "error_invalid_time": "The time must be within opening hours (09:00 AM - 08:00 PM)."
     },
     "faq": {
       "title": "Frequent Questions",

@@ -17,14 +17,41 @@ export const Visit: React.FC = () => {
   
   const [isGenerated, setIsGenerated] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
+  const getTodayDateString = () => {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    return `${yyyy}-${mm}-${dd}`;
+  };
 
   const handleGenerate = (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitError(null);
+
+    const selectedDate = new Date(formData.date);
+    const today = new Date();
+    selectedDate.setHours(0, 0, 0, 0);
+    today.setHours(0, 0, 0, 0);
+
+    if (selectedDate < today) {
+      setSubmitError(t('reservation.error_past_date'));
+      return;
+    }
+
+    const time = formData.time;
+    if (time < '09:00' || time > '20:00') {
+      setSubmitError(t('reservation.error_invalid_time'));
+      return;
+    }
+
     setIsGenerated(true);
   };
 
   const getSummaryText = () => {
-    return `Reservierungsanfrage Café Zeitlos\nName: ${formData.name}\nDatum: ${formData.date}\nUhrzeit: ${formData.time}\nPersonen: ${formData.guests}${formData.note ? `\nNotiz: ${formData.note}` : ''}`;
+    return `${t('reservation.title')} Café Zeitlos\n${t('reservation.name_label')}: ${formData.name}\n${t('reservation.date')}: ${formData.date}\n${t('reservation.time')}: ${formData.time}\n${t('reservation.guests_label')}: ${formData.guests}${formData.note ? `\n${t('reservation.note_label')}: ${formData.note}` : ''}`;
   };
 
   const copyToClipboard = () => {
@@ -107,6 +134,7 @@ export const Visit: React.FC = () => {
                       id="res-date"
                       type="date" 
                       required
+                      min={getTodayDateString()}
                       value={formData.date}
                       onChange={e => setFormData({...formData, date: e.target.value})}
                       className="w-full bg-cafe-ivory border border-cafe-cream h-12 px-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-cafe-gold transition-all"
@@ -118,6 +146,8 @@ export const Visit: React.FC = () => {
                       id="res-time"
                       type="time" 
                       required
+                      min="09:00"
+                      max="20:00"
                       value={formData.time}
                       onChange={e => setFormData({...formData, time: e.target.value})}
                       className="w-full bg-cafe-ivory border border-cafe-cream h-12 px-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-cafe-gold transition-all"
@@ -162,6 +192,10 @@ export const Visit: React.FC = () => {
                   ></textarea>
                 </div>
 
+                {submitError && (
+                  <p className="text-red-500 text-sm font-semibold animate-pulse bg-red-50 p-2.5 rounded-lg border border-red-200 text-center">{submitError}</p>
+                )}
+
                 <div className="pt-2">
                   <Button type="submit" fullWidth>{t('reservation.submit')}</Button>
                 </div>
@@ -173,10 +207,10 @@ export const Visit: React.FC = () => {
                   <Info className="text-cafe-gold mt-0.5 flex-shrink-0" size={20} />
                   <div>
                     <h4 className="font-bold text-cafe-espresso text-sm mb-1 uppercase tracking-wider">
-                      Reservierungsanfrage
+                      {t('reservation.title')}
                     </h4>
                     <p className="text-sm text-[#735b40] leading-relaxed">
-                      Dies ist noch keine bestätigte Reservierung. Bitte kopiere deine Anfrage und kontaktiere das Café per Instagram oder Telefon, um deinen Tisch zu bestätigen.
+                      {t('reservation.disclaimer_generate')}
                     </p>
                   </div>
                 </div>
@@ -184,8 +218,8 @@ export const Visit: React.FC = () => {
                 {/* Structured Overview Card */}
                 <div className="bg-cafe-ivory/50 border border-cafe-cream rounded-2xl p-6 shadow-sm space-y-4">
                   <div className="flex items-center justify-between pb-3 border-b border-cafe-cream/60">
-                    <span className="font-serif italic font-semibold text-cafe-espresso text-lg">Zusammenfassung</span>
-                    <span className="text-xs bg-cafe-gold/20 text-[#735b40] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">Entwurf</span>
+                    <span className="font-serif italic font-semibold text-cafe-espresso text-lg">{t('reservation.summary')}</span>
+                    <span className="text-xs bg-cafe-gold/20 text-[#735b40] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">{t('reservation.draft')}</span>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -194,7 +228,7 @@ export const Visit: React.FC = () => {
                         <User size={18} />
                       </div>
                       <div>
-                        <span className="text-[10px] uppercase tracking-wider text-cafe-text/60 block font-bold">Name</span>
+                        <span className="text-[10px] uppercase tracking-wider text-cafe-text/60 block font-bold">{t('reservation.name_label')}</span>
                         <span className="text-sm font-semibold text-cafe-espresso">{formData.name}</span>
                       </div>
                     </div>
@@ -204,7 +238,7 @@ export const Visit: React.FC = () => {
                         <Calendar size={18} />
                       </div>
                       <div>
-                        <span className="text-[10px] uppercase tracking-wider text-cafe-text/60 block font-bold">Datum</span>
+                        <span className="text-[10px] uppercase tracking-wider text-cafe-text/60 block font-bold">{t('reservation.date')}</span>
                         <span className="text-sm font-semibold text-cafe-espresso">{formData.date}</span>
                       </div>
                     </div>
@@ -214,8 +248,8 @@ export const Visit: React.FC = () => {
                         <Clock size={18} />
                       </div>
                       <div>
-                        <span className="text-[10px] uppercase tracking-wider text-cafe-text/60 block font-bold">Uhrzeit</span>
-                        <span className="text-sm font-semibold text-cafe-espresso">{formData.time} Uhr</span>
+                        <span className="text-[10px] uppercase tracking-wider text-cafe-text/60 block font-bold">{t('reservation.time')}</span>
+                        <span className="text-sm font-semibold text-cafe-espresso">{t('reservation.time_value', { time: formData.time })}</span>
                       </div>
                     </div>
 
@@ -224,8 +258,8 @@ export const Visit: React.FC = () => {
                         <User size={18} />
                       </div>
                       <div>
-                        <span className="text-[10px] uppercase tracking-wider text-cafe-text/60 block font-bold">Gäste</span>
-                        <span className="text-sm font-semibold text-cafe-espresso">{formData.guests} Personen</span>
+                        <span className="text-[10px] uppercase tracking-wider text-cafe-text/60 block font-bold">{t('reservation.guests_label')}</span>
+                        <span className="text-sm font-semibold text-cafe-espresso">{t('reservation.guests_count', { count: formData.guests })}</span>
                       </div>
                     </div>
                   </div>
@@ -236,7 +270,7 @@ export const Visit: React.FC = () => {
                         <MessageSquare size={18} />
                       </div>
                       <div className="flex-1">
-                        <span className="text-[10px] uppercase tracking-wider text-cafe-text/60 block font-bold">Notiz</span>
+                        <span className="text-[10px] uppercase tracking-wider text-cafe-text/60 block font-bold">{t('reservation.note_label')}</span>
                         <span className="text-sm text-cafe-text leading-normal block whitespace-pre-wrap">{formData.note}</span>
                       </div>
                     </div>
@@ -252,7 +286,7 @@ export const Visit: React.FC = () => {
                     className={`gap-2 h-12 text-base transition-all rounded-full flex items-center justify-center ${isCopied ? '!bg-green-700 !text-white hover:!bg-green-800' : ''}`}
                   >
                     {isCopied ? <Check size={18} /> : <Copy size={18} />}
-                    {isCopied ? 'Angaben kopiert!' : t('reservation.copy')}
+                    {isCopied ? t('reservation.copied') : t('reservation.copy')}
                   </Button>
                   <div className="grid grid-cols-2 gap-3">
                     <Button 
@@ -269,14 +303,14 @@ export const Visit: React.FC = () => {
                       className="gap-2 h-12 rounded-full"
                     >
                       <Phone size={18} />
-                      Anrufen
+                      {t('reservation.call')}
                     </Button>
                   </div>
                   <button 
                     onClick={() => setIsGenerated(false)}
                     className="mt-4 text-sm font-medium text-cafe-text/60 hover:text-cafe-espresso underline underline-offset-4"
                   >
-                    Anfrage bearbeiten
+                    {t('reservation.edit')}
                   </button>
                 </div>
               </div>
@@ -287,3 +321,4 @@ export const Visit: React.FC = () => {
     </section>
   );
 };
+
