@@ -23,9 +23,13 @@ describe('Visit Component', () => {
     fireEvent.change(screen.getByLabelText(/reservation.time/), { target: { value: '10:00' } });
     fireEvent.change(screen.getByLabelText(/reservation.name/), { target: { value: 'Max Mustermann' } });
     
-    // Submit
+    // Submit form → phone dialog appears
     fireEvent.click(screen.getByText('reservation.submit'));
-    
+
+    // Fill in phone number and confirm
+    fireEvent.change(screen.getByPlaceholderText(/\+49/), { target: { value: '+49 151 12345678' } });
+    fireEvent.click(screen.getByText('Bestätigen'));
+
     // Form should be gone, summary should be visible
     expect(screen.getByText(/Max Mustermann/)).toBeInTheDocument();
     expect(screen.getByText(/2026-08-01/)).toBeInTheDocument();

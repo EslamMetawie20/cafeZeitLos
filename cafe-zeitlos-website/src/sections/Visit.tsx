@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { MapPin, Phone, Clock, Copy, Camera, Info, Calendar, User, MessageSquare, Check } from 'lucide-react';
+import { MapPin, Phone, Clock, Copy, Camera, Info, Calendar, User, MessageSquare, Check, X } from 'lucide-react';
 import { Button } from '../components/ui/Button';
+import { motion, AnimatePresence } from 'framer-motion';
 import { type ReservationRequest } from '../types';
 
 export const Visit: React.FC = () => {
   const { t } = useTranslation();
-  
+
   const [formData, setFormData] = useState<ReservationRequest>({
     date: '',
     time: '',
@@ -14,10 +15,15 @@ export const Visit: React.FC = () => {
     name: '',
     note: ''
   });
-  
+
   const [isGenerated, setIsGenerated] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+
+  // Phone dialog state
+  const [showPhoneDialog, setShowPhoneDialog] = useState(false);
+  const [phone, setPhone] = useState('');
+  const [phoneError, setPhoneError] = useState<string | null>(null);
 
   const getTodayDateString = () => {
     const today = new Date();
@@ -47,7 +53,23 @@ export const Visit: React.FC = () => {
       return;
     }
 
+    // Show phone confirmation dialog instead of going straight to summary
+    setShowPhoneDialog(true);
+  };
+
+  const handlePhoneConfirm = () => {
+    setPhoneError(null);
+    const cleaned = phone.replace(/\s/g, '');
+    if (!cleaned || cleaned.length < 6) {
+      setPhoneError('Bitte gib eine gültige Handynummer ein.');
+      return;
+    }
+    setShowPhoneDialog(false);
     setIsGenerated(true);
+  };
+
+  const handlePhoneKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') handlePhoneConfirm();
   };
 
   const getSummaryText = () => {
@@ -74,9 +96,9 @@ export const Visit: React.FC = () => {
           {/* Info Card */}
           <div className="flex-1 bg-cafe-espresso text-cafe-ivory rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-cafe-gold/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-            
+
             <h3 className="font-heading text-3xl font-bold mb-8 relative z-10">Café Zeitlos</h3>
-            
+
             <div className="space-y-8 relative z-10">
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-full bg-cafe-cocoa flex items-center justify-center flex-shrink-0">
@@ -85,9 +107,9 @@ export const Visit: React.FC = () => {
                 <div>
                   <p className="font-bold text-lg mb-1">Adresse</p>
                   <p className="text-cafe-cream/90 text-lg leading-relaxed">{t('visit.address')}</p>
-                  <a 
-                    href="https://maps.apple.com/?q=Rebenring+47a,+38106+Braunschweig" 
-                    target="_blank" 
+                  <a
+                    href="https://maps.apple.com/?q=Rebenring+47a,+38106+Braunschweig"
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="inline-block mt-3 text-cafe-gold hover:text-white transition-colors underline underline-offset-4"
                   >
@@ -130,9 +152,9 @@ export const Visit: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div className="space-y-1.5">
                     <label htmlFor="res-date" className="text-sm font-bold text-cafe-text block">{t('reservation.date')} *</label>
-                    <input 
+                    <input
                       id="res-date"
-                      type="date" 
+                      type="date"
                       required
                       min={getTodayDateString()}
                       value={formData.date}
@@ -142,9 +164,9 @@ export const Visit: React.FC = () => {
                   </div>
                   <div className="space-y-1.5">
                     <label htmlFor="res-time" className="text-sm font-bold text-cafe-text block">{t('reservation.time')} *</label>
-                    <input 
+                    <input
                       id="res-time"
-                      type="time" 
+                      type="time"
                       required
                       min="09:00"
                       max="20:00"
@@ -158,9 +180,9 @@ export const Visit: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div className="space-y-1.5">
                     <label htmlFor="res-guests" className="text-sm font-bold text-cafe-text block">{t('reservation.guests')} *</label>
-                    <input 
+                    <input
                       id="res-guests"
-                      type="number" 
+                      type="number"
                       min="1"
                       max="20"
                       required
@@ -171,9 +193,9 @@ export const Visit: React.FC = () => {
                   </div>
                   <div className="space-y-1.5">
                     <label htmlFor="res-name" className="text-sm font-bold text-cafe-text block">{t('reservation.name')} *</label>
-                    <input 
+                    <input
                       id="res-name"
-                      type="text" 
+                      type="text"
                       required
                       value={formData.name}
                       onChange={e => setFormData({...formData, name: e.target.value})}
@@ -184,7 +206,7 @@ export const Visit: React.FC = () => {
 
                 <div className="space-y-1.5">
                   <label className="text-sm font-bold text-cafe-text block">{t('reservation.note')}</label>
-                  <textarea 
+                  <textarea
                     rows={3}
                     value={formData.note}
                     onChange={e => setFormData({...formData, note: e.target.value})}
@@ -279,9 +301,9 @@ export const Visit: React.FC = () => {
 
                 {/* Actions Grid */}
                 <div className="flex flex-col gap-3">
-                  <Button 
-                    onClick={copyToClipboard} 
-                    variant={isCopied ? "primary" : "secondary"} 
+                  <Button
+                    onClick={copyToClipboard}
+                    variant={isCopied ? "primary" : "secondary"}
                     fullWidth
                     className={`gap-2 h-12 text-base transition-all rounded-full flex items-center justify-center ${isCopied ? '!bg-green-700 !text-white hover:!bg-green-800' : ''}`}
                   >
@@ -289,16 +311,16 @@ export const Visit: React.FC = () => {
                     {isCopied ? t('reservation.copied') : t('reservation.copy')}
                   </Button>
                   <div className="grid grid-cols-2 gap-3">
-                    <Button 
-                      variant="outline" 
+                    <Button
+                      variant="outline"
                       onClick={() => window.open('https://www.instagram.com/cafezeitlos_bs/', '_blank')}
                       className="gap-2 h-12 rounded-full"
                     >
                       <Camera size={18} />
                       Instagram
                     </Button>
-                    <Button 
-                      variant="outline" 
+                    <Button
+                      variant="outline"
                       onClick={() => window.open('tel:+4953112885768')}
                       className="gap-2 h-12 rounded-full"
                     >
@@ -306,7 +328,7 @@ export const Visit: React.FC = () => {
                       {t('reservation.call')}
                     </Button>
                   </div>
-                  <button 
+                  <button
                     onClick={() => setIsGenerated(false)}
                     className="mt-4 text-sm font-medium text-cafe-text/60 hover:text-cafe-espresso underline underline-offset-4"
                   >
@@ -318,7 +340,85 @@ export const Visit: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* ── Phone Confirmation Dialog ── */}
+      <AnimatePresence>
+        {showPhoneDialog && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="fixed inset-0 bg-cafe-espresso/50 backdrop-blur-sm z-[70]"
+              onClick={() => setShowPhoneDialog(false)}
+            />
+
+            {/* Dialog Panel */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.92, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.92, y: 20 }}
+              transition={{ type: 'spring', damping: 28, stiffness: 300 }}
+              className="fixed inset-x-4 top-1/2 -translate-y-1/2 z-[80] max-w-sm mx-auto bg-white rounded-3xl shadow-2xl p-8"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="phone-dialog-title"
+            >
+              {/* Close button */}
+              <button
+                onClick={() => setShowPhoneDialog(false)}
+                className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-cafe-cream/60 text-cafe-espresso hover:bg-cafe-cream transition-colors"
+                aria-label="Schließen"
+              >
+                <X size={16} />
+              </button>
+
+              {/* Icon */}
+              <div className="w-14 h-14 rounded-2xl bg-cafe-gold/10 flex items-center justify-center mb-5 mx-auto">
+                <Phone size={26} className="text-cafe-gold" />
+              </div>
+
+              {/* Title */}
+              <h3 id="phone-dialog-title" className="font-heading text-2xl font-bold text-cafe-espresso text-center mb-1">
+                Handynummer bestätigen
+              </h3>
+              <p className="text-sm text-cafe-text/60 text-center mb-6">
+                Damit wir deine Anfrage bestätigen können.
+              </p>
+
+              {/* Input */}
+              <div className="space-y-1.5 mb-4">
+                <label htmlFor="phone-input" className="text-sm font-bold text-cafe-text block">
+                  Handynummer *
+                </label>
+                <input
+                  id="phone-input"
+                  type="tel"
+                  autoFocus
+                  placeholder="+49 151 23456789"
+                  value={phone}
+                  onChange={e => { setPhone(e.target.value); setPhoneError(null); }}
+                  onKeyDown={handlePhoneKeyDown}
+                  className="w-full bg-cafe-ivory border border-cafe-cream h-13 px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-cafe-gold transition-all text-base"
+                />
+                {phoneError && (
+                  <p className="text-red-500 text-xs font-medium mt-1">{phoneError}</p>
+                )}
+              </div>
+
+              {/* Confirm Button */}
+              <button
+                onClick={handlePhoneConfirm}
+                className="w-full h-13 py-3.5 bg-cafe-espresso text-cafe-ivory font-semibold text-base rounded-2xl hover:bg-cafe-cocoa transition-colors active:scale-95 mt-1"
+              >
+                Bestätigen
+              </button>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
-
