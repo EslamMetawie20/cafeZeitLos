@@ -21,7 +21,7 @@ export const FAQ: React.FC = () => {
     <section className="py-24 bg-cafe-ivory">
       <div className="container mx-auto px-4 md:px-6 max-w-3xl">
         <div className="text-center mb-16">
-          <h2 className="font-heading text-4xl md:text-5xl font-bold text-cafe-espresso mb-4">
+          <h2 className="font-heading text-[clamp(2rem,6vw,3rem)] font-bold text-cafe-espresso mb-4">
             {t('faq.title')}
           </h2>
           <div className="w-20 h-1 bg-cafe-gold rounded-full mx-auto"></div>
@@ -38,11 +38,11 @@ export const FAQ: React.FC = () => {
               className="bg-white rounded-2xl overflow-hidden border border-cafe-cream"
             >
               <button
-                className="w-full px-6 py-5 text-left flex justify-between items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-gold focus-visible:ring-inset"
+                className="w-full px-4 sm:px-6 py-4 sm:py-5 text-left flex justify-between items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-gold focus-visible:ring-inset"
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
                 aria-expanded={openIndex === index}
               >
-                <span className="font-heading font-bold text-xl text-cafe-espresso pr-8">{t(faq.q)}</span>
+                <span className="font-heading font-bold text-lg sm:text-xl text-cafe-espresso pr-4 sm:pr-8">{t(faq.q)}</span>
                 <ChevronDown 
                   className={`flex-shrink-0 text-cafe-gold transition-transform duration-300 ${openIndex === index ? 'rotate-180' : ''}`} 
                   size={24} 

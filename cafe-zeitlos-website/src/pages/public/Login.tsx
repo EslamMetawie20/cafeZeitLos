@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Eye, EyeOff, ArrowLeft, CheckCircle2 } from 'lucide-react';
+import { Eye, EyeOff, CheckCircle2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export function Login() {
@@ -169,16 +169,6 @@ export function Login() {
             </p>
           </div>
 
-          {/* Back to Website */}
-          <div className="mt-8 text-center w-full pt-6 border-t border-[#d8c2b9]/30">
-            <button 
-              onClick={() => navigate('/')}
-              className="inline-flex items-center gap-2 text-[#685c54] hover:text-[#8b4c2f] transition-colors border-b border-transparent hover:border-[#8b4c2f] pb-1 text-sm font-semibold focus:outline-none"
-            >
-              <ArrowLeft size={16} />
-              {t('login.back')}
-            </button>
-          </div>
         </motion.div>
       </main>
     </div>

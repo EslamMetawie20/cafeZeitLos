@@ -28,7 +28,7 @@ export const PopularDishes: React.FC = () => {
           </Button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+        <div className="grid grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4 md:gap-8">
           {popularDishes.map((dish, index) => (
             <motion.div 
               key={dish.id}
@@ -45,27 +45,27 @@ export const PopularDishes: React.FC = () => {
                   loading="lazy"
                 />
                 {dish.dietaryTags.length > 0 && (
-                  <div className="absolute top-4 left-4 flex gap-2">
+                  <div className="absolute top-2 left-2 sm:top-4 sm:left-4 flex flex-wrap gap-1">
                     {dish.dietaryTags.map(tag => (
-                      <span key={tag} className="bg-cafe-ivory/90 backdrop-blur-sm px-3 py-1 text-xs font-bold text-cafe-olive rounded-full shadow-sm">
+                      <span key={tag} className="bg-cafe-ivory/90 backdrop-blur-sm px-1.5 sm:px-3 py-0.5 sm:py-1 text-[8px] sm:text-xs font-bold text-cafe-olive rounded-full shadow-sm">
                         {t(`menu.filter_${tag.toLowerCase()}`, tag)}
                       </span>
                     ))}
                   </div>
                 )}
               </div>
-              <div className="p-6 md:p-8 flex-1 flex flex-col">
-                <div className="flex justify-between items-start mb-3 gap-4">
-                  <h3 className="font-heading text-2xl font-bold text-cafe-espresso leading-tight">{dish.name}</h3>
-                  <span className="font-semibold text-lg text-cafe-terracotta whitespace-nowrap">
+              <div className="p-3 sm:p-4 md:p-8 flex-1 flex flex-col justify-between">
+                <div className="flex flex-col gap-1 mb-1.5">
+                  <h3 className="font-heading text-sm sm:text-lg md:text-2xl font-bold text-cafe-espresso leading-tight line-clamp-2">{dish.name}</h3>
+                  <span className="font-semibold text-xs sm:text-sm md:text-lg text-cafe-terracotta">
                     {dish.price.toFixed(2).replace('.', ',')} €
                   </span>
                 </div>
-                <p className="text-cafe-text/80 text-sm md:text-base leading-relaxed flex-1">
+                <p className="text-cafe-text/80 text-[10px] sm:text-xs md:text-base leading-relaxed flex-1 line-clamp-2">
                   {dish.description}
                 </p>
                 {dish.needsConfirmation && (
-                  <p className="text-xs text-cafe-text/50 mt-4 italic">
+                  <p className="text-[8px] sm:text-xs text-cafe-text/50 mt-2 sm:mt-4 italic">
                     *{t('menu.needs_confirmation')}
                   </p>
                 )}

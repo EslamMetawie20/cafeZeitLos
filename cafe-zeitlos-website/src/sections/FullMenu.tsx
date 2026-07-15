@@ -101,7 +101,7 @@ export const FullMenu: React.FC = () => {
         {filteredData.length > 0 ? (
           <motion.div 
             layout
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+            className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-6"
           >
             <AnimatePresence>
               {filteredData.map(item => (
@@ -123,23 +123,23 @@ export const FullMenu: React.FC = () => {
                       loading="lazy"
                     />
                     {item.dietaryTags.length > 0 && (
-                      <div className="absolute top-3 left-3 flex gap-2">
+                      <div className="absolute top-2 left-2 sm:top-3 sm:left-3 flex flex-wrap gap-1">
                         {item.dietaryTags.map(tag => (
-                          <span key={tag} className="bg-cafe-ivory/90 backdrop-blur-sm px-2.5 py-0.5 text-[10px] uppercase tracking-wider font-bold text-cafe-olive rounded-full shadow-sm">
+                          <span key={tag} className="bg-cafe-ivory/90 backdrop-blur-sm px-1.5 sm:px-2.5 py-0.5 text-[8px] sm:text-[10px] uppercase tracking-wider font-bold text-cafe-olive rounded-full shadow-sm">
                             {t(`menu.filter_${tag.toLowerCase()}`, tag)}
                           </span>
                         ))}
                       </div>
                     )}
                   </div>
-                  <div className="p-5 flex-1 flex flex-col">
-                    <div className="flex justify-between items-start gap-4 mb-2">
-                      <h3 className="font-heading font-bold text-xl text-cafe-espresso leading-tight">{item.name}</h3>
-                      <span className="font-semibold text-cafe-terracotta whitespace-nowrap">
+                  <div className="p-3 sm:p-4 md:p-5 flex-1 flex flex-col justify-between">
+                    <div className="flex flex-col gap-1 mb-1.5">
+                      <h3 className="font-heading font-bold text-sm sm:text-base md:text-xl text-cafe-espresso leading-tight line-clamp-2">{item.name}</h3>
+                      <span className="font-semibold text-xs sm:text-sm md:text-base text-cafe-terracotta">
                         {item.price.toFixed(2).replace('.', ',')} €
                       </span>
                     </div>
-                    <p className="text-cafe-text/70 text-sm line-clamp-2 mt-1">
+                    <p className="text-cafe-text/70 text-[10px] sm:text-xs md:text-sm line-clamp-2 leading-relaxed">
                       {item.description}
                     </p>
                   </div>

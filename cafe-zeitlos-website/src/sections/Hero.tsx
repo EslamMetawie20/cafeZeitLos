@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 export const Hero: React.FC = () => {
   const { t } = useTranslation();
   return (
-    <section id="home-hero" className="relative min-h-[100svh] flex flex-col justify-center pt-24 pb-16 overflow-hidden">
+    <section id="home-hero" className="relative min-h-[100svh] flex flex-col justify-center pt-20 md:pt-24 pb-10 md:pb-16 overflow-hidden">
       <div className="container mx-auto px-4 md:px-6 flex-1 flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
         
         {/* Text Content */}
@@ -21,13 +21,13 @@ export const Hero: React.FC = () => {
         >
 
           
-          <h1 className="font-heading text-[clamp(2.5rem,8vw,5.5rem)] font-bold leading-[1.1] mb-6 text-cafe-espresso">
+          <h1 className="font-heading text-[clamp(2.25rem,8vw,5.5rem)] font-bold leading-[1.1] mb-6 text-cafe-espresso">
             {t('hero.title_line1')}<br />
             {t('hero.title_line2')}<br />
             {t('hero.title_line3')}
           </h1>
           
-          <p className="text-lg md:text-xl text-cafe-text opacity-90 max-w-lg mb-8 text-balance">
+          <p className="text-base md:text-xl text-cafe-text opacity-90 max-w-lg mb-8 text-balance">
             {t('hero.description')}
           </p>
           
@@ -98,7 +98,7 @@ export const Hero: React.FC = () => {
             <img 
               src={heroImage} 
               alt="Café Zeitlos Frühstück - Cappuccino und Croissant"
-              className="w-full h-full object-contain mix-blend-multiply drop-shadow-2xl scale-125 sm:scale-150 md:scale-[1.3] lg:scale-[1.35] xl:scale-[1.5] origin-center lg:origin-right translate-x-4 sm:translate-x-8 lg:translate-x-12 xl:translate-x-20"
+              className="w-full h-full object-contain mix-blend-multiply drop-shadow-2xl scale-100 sm:scale-125 md:scale-[1.3] lg:scale-[1.35] xl:scale-[1.5] origin-center lg:origin-right translate-x-0 sm:translate-x-4 lg:translate-x-12 xl:translate-x-20"
               loading="eager"
             />
           </div>
