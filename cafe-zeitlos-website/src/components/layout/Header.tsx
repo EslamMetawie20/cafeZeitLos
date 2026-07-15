@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, User } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import logoImage from '../../assets/logo.png';
 
@@ -11,7 +11,6 @@ export const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-
 
   const [activeHash, setActiveHash] = useState<string>('');
 
@@ -98,10 +97,22 @@ export const Header: React.FC = () => {
     { name: t('nav.about'), path: '/', hash: '#ueber-uns' },
   ];
 
+  const getLoginText = () => {
+    return t('nav.login');
+  };
+
+  const getLoginPath = () => {
+    return '/login';
+  };
+
+  const isAuthPage = location.pathname === '/login' || location.pathname === '/register';
+
   return (
     <header 
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-cafe-ivory/95 backdrop-blur-md shadow-sm py-3' : 'bg-transparent py-5'
+        isScrolled || isAuthPage 
+          ? 'bg-cafe-ivory/95 backdrop-blur-md shadow-sm py-3' 
+          : 'bg-transparent py-5'
       }`}
     >
       <div className="container mx-auto px-4 md:px-6">
@@ -164,6 +175,13 @@ export const Header: React.FC = () => {
                 )}
               </AnimatePresence>
             </button>
+            <Link 
+              to={getLoginPath()}
+              className="flex items-center gap-2 text-sm font-medium bg-cafe-terracotta text-white hover:bg-cafe-terracotta/90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-gold rounded-full px-5 py-2.5 shadow-sm active:scale-95"
+            >
+              <User size={16} />
+              <span>{getLoginText()}</span>
+            </Link>
           </nav>
 
           {/* Mobile Menu Toggle */}
@@ -201,6 +219,14 @@ export const Header: React.FC = () => {
                 );
               })}
               
+              <Link
+                to={getLoginPath()}
+                onClick={() => setMobileMenuOpen(false)}
+                className="py-4 mt-2 mb-2 text-lg font-medium bg-cafe-terracotta text-white rounded-xl px-4 flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-gold active:scale-95 transition-transform min-h-[44px]"
+              >
+                <User size={20} />
+                {getLoginText()}
+              </Link>
               
               <div className="py-4 flex justify-between items-center px-2 border-t border-cafe-cream mt-2">
                 <span className="text-lg font-medium text-cafe-text min-h-[44px] flex items-center">{t('nav.language')}</span>

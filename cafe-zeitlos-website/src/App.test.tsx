@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
 import { AppRoutes } from './App';
@@ -25,6 +25,11 @@ describe('App Routing', () => {
     );
   };
 
+  it('renders LoginPage on /login', () => {
+    renderWithRoute('/login');
+    expect(screen.getAllByText('nav.demo_login')[0]).toBeInTheDocument();
+  });
+
   it('shows Hero first on / and not the menu', () => {
     const { container } = render(
       <MemoryRouter initialEntries={['/']}>
@@ -47,6 +52,7 @@ describe('App Routing', () => {
   it('contains correct Hero text', () => {
     renderWithRoute('/');
     // Since react-i18next is mocked to return the translation key, we assert on the key
+
   });
 
   it('/highlights redirects to real highlights section', () => {

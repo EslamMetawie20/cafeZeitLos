@@ -5,6 +5,8 @@ import { PublicLayout } from './components/layout/PublicLayout';
 
 // Public Pages
 import { Home } from './pages/public/Home';
+import { Login } from './pages/public/Login';
+import { Register } from './pages/public/Register';
 
 export function AppRoutes() {
   return (
@@ -19,6 +21,9 @@ export function AppRoutes() {
         <Route path="/gallery" element={<Navigate to="/#galerie" replace />} />
         <Route path="/about" element={<Navigate to="/#ueber-uns" replace />} />
         <Route path="/visit" element={<Navigate to="/#besuch-planen" replace />} />
+        
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Route>
 
       {/* Catch all */}
