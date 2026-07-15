@@ -5,7 +5,7 @@ import { Eye, EyeOff, ArrowLeft, CheckCircle2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export function Login() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   
@@ -82,15 +82,6 @@ export function Login() {
           animate={{ opacity: 1, y: 0 }}
           className="w-full bg-[#fef9f1]/95 backdrop-blur-xl rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] p-8 md:p-10 border border-white/20 flex flex-col items-center relative"
         >
-          {/* Language Switcher */}
-          <button 
-            type="button"
-            onClick={() => i18n.changeLanguage(i18n.language === 'de' ? 'en' : 'de')}
-            className="absolute top-4 right-4 text-xs font-semibold px-3 py-1.5 bg-[#d8c2b9]/25 hover:bg-[#d8c2b9]/40 text-[#685c54] rounded-full transition-all focus:outline-none flex items-center gap-1.5"
-            aria-label={t('nav.switch_language')}
-          >
-            <span>{i18n.language === 'de' ? '🇬🇧 EN' : '🇩🇪 DE'}</span>
-          </button>
 
           <div className="mb-8 text-center mt-4">
             <h2 className="text-2xl font-serif font-bold text-[#2c1e16] mb-2">{t('auth.login_title')}</h2>
@@ -185,7 +176,7 @@ export function Login() {
               className="inline-flex items-center gap-2 text-[#685c54] hover:text-[#8b4c2f] transition-colors border-b border-transparent hover:border-[#8b4c2f] pb-1 text-sm font-semibold focus:outline-none"
             >
               <ArrowLeft size={16} />
-              {t('auth.back')}
+              {t('login.back')}
             </button>
           </div>
         </motion.div>
