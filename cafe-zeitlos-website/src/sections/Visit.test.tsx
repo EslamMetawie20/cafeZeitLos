@@ -27,7 +27,7 @@ describe('Visit Component', () => {
     fireEvent.click(screen.getByText('reservation.submit'));
 
     // Phone step: fill number and send code
-    fireEvent.change(screen.getByPlaceholderText(/\+49/), { target: { value: '+49 151 12345678' } });
+    fireEvent.change(screen.getByPlaceholderText(/151/), { target: { value: '151 12345678' } });
     fireEvent.click(screen.getByText('Code senden'));
 
     // OTP step should now be visible

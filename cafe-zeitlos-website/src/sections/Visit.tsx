@@ -23,6 +23,7 @@ export const Visit: React.FC = () => {
   // Dialog state
   const [showDialog, setShowDialog] = useState(false);
   const [dialogStep, setDialogStep] = useState<'phone' | 'otp'>('phone');
+  const [countryCode, setCountryCode] = useState('+49');
   const [phone, setPhone] = useState('');
   const [phoneError, setPhoneError] = useState<string | null>(null);
   // OTP: 6 digits
@@ -30,6 +31,20 @@ export const Visit: React.FC = () => {
   const [otpError, setOtpError] = useState<string | null>(null);
   const [otpShake, setOtpShake] = useState(false);
   const otpRefs = useRef<(HTMLInputElement | null)[]>([]);
+
+  const countries = [
+    { code: '+49', flag: '🇩🇪', name: 'Deutschland' },
+    { code: '+43', flag: '🇦🇹', name: 'Österreich' },
+    { code: '+41', flag: '🇨🇭', name: 'Schweiz' },
+    { code: '+1',  flag: '🇺🇸', name: 'USA' },
+    { code: '+44', flag: '🇬🇧', name: 'UK' },
+    { code: '+33', flag: '🇫🇷', name: 'Frankreich' },
+    { code: '+39', flag: '🇮🇹', name: 'Italien' },
+    { code: '+34', flag: '🇪🇸', name: 'Spanien' },
+    { code: '+90', flag: '🇹🇷', name: 'Türkei' },
+    { code: '+20', flag: '🇪🇬', name: 'Ägypten' },
+  ];
+
 
   const getTodayDateString = () => {
     const today = new Date();
@@ -62,6 +77,7 @@ export const Visit: React.FC = () => {
     // Open dialog at phone step
     setDialogStep('phone');
     setPhone('');
+    setCountryCode('+49');
     setPhoneError(null);
     setOtp(['', '', '', '', '', '']);
     setOtpError(null);
@@ -71,7 +87,7 @@ export const Visit: React.FC = () => {
   const handlePhoneConfirm = () => {
     setPhoneError(null);
     const cleaned = phone.replace(/\s/g, '');
-    if (!cleaned || cleaned.length < 6) {
+    if (!cleaned || cleaned.length < 4) {
       setPhoneError('Bitte gib eine gültige Handynummer ein.');
       return;
     }
@@ -445,16 +461,47 @@ export const Visit: React.FC = () => {
                       <label htmlFor="phone-input" className="text-sm font-bold text-cafe-text block">
                         Handynummer *
                       </label>
-                      <input
-                        id="phone-input"
-                        type="tel"
-                        autoFocus
-                        placeholder="+49 151 23456789"
-                        value={phone}
-                        onChange={e => { setPhone(e.target.value); setPhoneError(null); }}
-                        onKeyDown={handlePhoneKeyDown}
-                        className="w-full bg-cafe-ivory border border-cafe-cream px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-cafe-gold transition-all text-base"
-                      />
+                      {/* Country + Number row */}
+                      <div className={`flex rounded-xl border overflow-hidden transition-all focus-within:ring-2 focus-within:ring-cafe-gold ${
+                        phoneError ? 'border-red-400' : 'border-cafe-cream'
+                      }`}>
+                        {/* Country selector */}
+                        <div className="relative">
+                          <select
+                            value={countryCode}
+                            onChange={e => setCountryCode(e.target.value)}
+                            className="appearance-none h-full bg-cafe-cream/60 text-cafe-espresso text-sm font-semibold pl-3 pr-7 focus:outline-none cursor-pointer"
+                            aria-label="Ländervorwahl"
+                          >
+                            {countries.map(c => (
+                              <option key={c.code} value={c.code}>
+                                {c.flag} {c.code}
+                              </option>
+                            ))}
+                          </select>
+                          {/* Dropdown arrow */}
+                          <span className="pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-cafe-espresso/50 text-xs">▾</span>
+                        </div>
+                        {/* Divider */}
+                        <div className="w-px bg-cafe-cream self-stretch" />
+                        {/* Number input */}
+                        <input
+                          id="phone-input"
+                          type="tel"
+                          autoFocus
+                          placeholder="151 23456789"
+                          value={phone}
+                          onChange={e => { setPhone(e.target.value.replace(/[^\d\s]/g, '')); setPhoneError(null); }}
+                          onKeyDown={handlePhoneKeyDown}
+                          className="flex-1 bg-cafe-ivory px-3 py-3 text-base focus:outline-none"
+                        />
+                      </div>
+                      {/* Preview */}
+                      {phone && (
+                        <p className="text-xs text-cafe-text/50 mt-1">
+                          Vollständig: <span className="font-semibold text-cafe-espresso">{countryCode} {phone}</span>
+                        </p>
+                      )}
                       {phoneError && (
                         <p className="text-red-500 text-xs font-medium mt-1">{phoneError}</p>
                       )}
@@ -485,7 +532,7 @@ export const Visit: React.FC = () => {
                     </h3>
                     <p className="text-sm text-cafe-text/60 text-center mb-6">
                       Wir haben einen 6-stelligen Code an{' '}
-                      <span className="font-semibold text-cafe-espresso">{phone}</span> gesendet.
+                      <span className="font-semibold text-cafe-espresso">{countryCode} {phone}</span> gesendet.
                     </p>
 
                     {/* 6-digit OTP boxes */}
