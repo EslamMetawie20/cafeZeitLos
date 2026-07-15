@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { MapPin, Phone, Clock, Copy, Camera, Info, Calendar, User, MessageSquare, Check, X } from 'lucide-react';
+import { MapPin, Phone, Clock, Copy, Camera, Info, Calendar, User, MessageSquare, Check, X, ShieldCheck } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { motion, AnimatePresence } from 'framer-motion';
 import { type ReservationRequest } from '../types';
@@ -20,10 +20,16 @@ export const Visit: React.FC = () => {
   const [isCopied, setIsCopied] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
-  // Phone dialog state
-  const [showPhoneDialog, setShowPhoneDialog] = useState(false);
+  // Dialog state
+  const [showDialog, setShowDialog] = useState(false);
+  const [dialogStep, setDialogStep] = useState<'phone' | 'otp'>('phone');
   const [phone, setPhone] = useState('');
   const [phoneError, setPhoneError] = useState<string | null>(null);
+  // OTP: 6 digits
+  const [otp, setOtp] = useState(['', '', '', '', '', '']);
+  const [otpError, setOtpError] = useState<string | null>(null);
+  const [otpShake, setOtpShake] = useState(false);
+  const otpRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   const getTodayDateString = () => {
     const today = new Date();
@@ -53,8 +59,13 @@ export const Visit: React.FC = () => {
       return;
     }
 
-    // Show phone confirmation dialog instead of going straight to summary
-    setShowPhoneDialog(true);
+    // Open dialog at phone step
+    setDialogStep('phone');
+    setPhone('');
+    setPhoneError(null);
+    setOtp(['', '', '', '', '', '']);
+    setOtpError(null);
+    setShowDialog(true);
   };
 
   const handlePhoneConfirm = () => {
@@ -64,8 +75,43 @@ export const Visit: React.FC = () => {
       setPhoneError('Bitte gib eine gültige Handynummer ein.');
       return;
     }
-    setShowPhoneDialog(false);
-    setIsGenerated(true);
+    // Move to OTP step
+    setDialogStep('otp');
+    setOtp(['', '', '', '', '', '']);
+    setOtpError(null);
+    setTimeout(() => otpRefs.current[0]?.focus(), 80);
+  };
+
+  const handleOtpChange = (index: number, value: string) => {
+    if (!/^\d?$/.test(value)) return;
+    const next = [...otp];
+    next[index] = value;
+    setOtp(next);
+    setOtpError(null);
+    if (value && index < 5) {
+      otpRefs.current[index + 1]?.focus();
+    }
+  };
+
+  const handleOtpKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Backspace' && !otp[index] && index > 0) {
+      otpRefs.current[index - 1]?.focus();
+    }
+    if (e.key === 'Enter') handleOtpVerify();
+  };
+
+  const handleOtpVerify = () => {
+    const code = otp.join('');
+    if (code.length < 6) {
+      setOtpError('Bitte alle 6 Ziffern eingeben.');
+      return;
+    }
+    // Always wrong — no real backend
+    setOtpShake(true);
+    setTimeout(() => setOtpShake(false), 600);
+    setOtpError('Falscher Code. Bitte versuche es erneut.');
+    setOtp(['', '', '', '', '', '']);
+    setTimeout(() => otpRefs.current[0]?.focus(), 50);
   };
 
   const handlePhoneKeyDown = (e: React.KeyboardEvent) => {
@@ -341,9 +387,9 @@ export const Visit: React.FC = () => {
         </div>
       </div>
 
-      {/* ── Phone Confirmation Dialog ── */}
+      {/* ── Phone / OTP Dialog ── */}
       <AnimatePresence>
-        {showPhoneDialog && (
+        {showDialog && (
           <>
             {/* Backdrop */}
             <motion.div
@@ -352,7 +398,7 @@ export const Visit: React.FC = () => {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.25 }}
               className="fixed inset-0 bg-cafe-espresso/50 backdrop-blur-sm z-[70]"
-              onClick={() => setShowPhoneDialog(false)}
+              onClick={() => setShowDialog(false)}
             />
 
             {/* Dialog Panel */}
@@ -364,57 +410,134 @@ export const Visit: React.FC = () => {
               className="fixed inset-x-4 top-1/2 -translate-y-1/2 z-[80] max-w-sm mx-auto bg-white rounded-3xl shadow-2xl p-8"
               role="dialog"
               aria-modal="true"
-              aria-labelledby="phone-dialog-title"
+              aria-labelledby="dialog-title"
             >
               {/* Close button */}
               <button
-                onClick={() => setShowPhoneDialog(false)}
+                onClick={() => setShowDialog(false)}
                 className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-cafe-cream/60 text-cafe-espresso hover:bg-cafe-cream transition-colors"
                 aria-label="Schließen"
               >
                 <X size={16} />
               </button>
 
-              {/* Icon */}
-              <div className="w-14 h-14 rounded-2xl bg-cafe-gold/10 flex items-center justify-center mb-5 mx-auto">
-                <Phone size={26} className="text-cafe-gold" />
-              </div>
+              <AnimatePresence mode="wait">
 
-              {/* Title */}
-              <h3 id="phone-dialog-title" className="font-heading text-2xl font-bold text-cafe-espresso text-center mb-1">
-                Handynummer bestätigen
-              </h3>
-              <p className="text-sm text-cafe-text/60 text-center mb-6">
-                Damit wir deine Anfrage bestätigen können.
-              </p>
-
-              {/* Input */}
-              <div className="space-y-1.5 mb-4">
-                <label htmlFor="phone-input" className="text-sm font-bold text-cafe-text block">
-                  Handynummer *
-                </label>
-                <input
-                  id="phone-input"
-                  type="tel"
-                  autoFocus
-                  placeholder="+49 151 23456789"
-                  value={phone}
-                  onChange={e => { setPhone(e.target.value); setPhoneError(null); }}
-                  onKeyDown={handlePhoneKeyDown}
-                  className="w-full bg-cafe-ivory border border-cafe-cream h-13 px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-cafe-gold transition-all text-base"
-                />
-                {phoneError && (
-                  <p className="text-red-500 text-xs font-medium mt-1">{phoneError}</p>
+                {/* ── Step 1: Phone ── */}
+                {dialogStep === 'phone' && (
+                  <motion.div
+                    key="phone-step"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -30 }}
+                    transition={{ duration: 0.25 }}
+                  >
+                    <div className="w-14 h-14 rounded-2xl bg-cafe-gold/10 flex items-center justify-center mb-5 mx-auto">
+                      <Phone size={26} className="text-cafe-gold" />
+                    </div>
+                    <h3 id="dialog-title" className="font-heading text-2xl font-bold text-cafe-espresso text-center mb-1">
+                      Handynummer bestätigen
+                    </h3>
+                    <p className="text-sm text-cafe-text/60 text-center mb-6">
+                      Wir senden dir einen Code zur Bestätigung.
+                    </p>
+                    <div className="space-y-1.5 mb-4">
+                      <label htmlFor="phone-input" className="text-sm font-bold text-cafe-text block">
+                        Handynummer *
+                      </label>
+                      <input
+                        id="phone-input"
+                        type="tel"
+                        autoFocus
+                        placeholder="+49 151 23456789"
+                        value={phone}
+                        onChange={e => { setPhone(e.target.value); setPhoneError(null); }}
+                        onKeyDown={handlePhoneKeyDown}
+                        className="w-full bg-cafe-ivory border border-cafe-cream px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-cafe-gold transition-all text-base"
+                      />
+                      {phoneError && (
+                        <p className="text-red-500 text-xs font-medium mt-1">{phoneError}</p>
+                      )}
+                    </div>
+                    <button
+                      onClick={handlePhoneConfirm}
+                      className="w-full py-3.5 bg-cafe-espresso text-cafe-ivory font-semibold text-base rounded-2xl hover:bg-cafe-cocoa transition-colors active:scale-95"
+                    >
+                      Code senden
+                    </button>
+                  </motion.div>
                 )}
-              </div>
 
-              {/* Confirm Button */}
-              <button
-                onClick={handlePhoneConfirm}
-                className="w-full h-13 py-3.5 bg-cafe-espresso text-cafe-ivory font-semibold text-base rounded-2xl hover:bg-cafe-cocoa transition-colors active:scale-95 mt-1"
-              >
-                Bestätigen
-              </button>
+                {/* ── Step 2: OTP ── */}
+                {dialogStep === 'otp' && (
+                  <motion.div
+                    key="otp-step"
+                    initial={{ opacity: 0, x: 30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 30 }}
+                    transition={{ duration: 0.25 }}
+                  >
+                    <div className="w-14 h-14 rounded-2xl bg-cafe-gold/10 flex items-center justify-center mb-5 mx-auto">
+                      <ShieldCheck size={26} className="text-cafe-gold" />
+                    </div>
+                    <h3 id="dialog-title" className="font-heading text-2xl font-bold text-cafe-espresso text-center mb-1">
+                      Code eingeben
+                    </h3>
+                    <p className="text-sm text-cafe-text/60 text-center mb-6">
+                      Wir haben einen 6-stelligen Code an{' '}
+                      <span className="font-semibold text-cafe-espresso">{phone}</span> gesendet.
+                    </p>
+
+                    {/* 6-digit OTP boxes */}
+                    <motion.div
+                      animate={otpShake ? { x: [-8, 8, -6, 6, -4, 4, 0] } : { x: 0 }}
+                      transition={{ duration: 0.5 }}
+                      className="flex gap-2 justify-center mb-4"
+                    >
+                      {otp.map((digit, i) => (
+                        <input
+                          key={i}
+                          ref={el => { otpRefs.current[i] = el; }}
+                          type="text"
+                          inputMode="numeric"
+                          maxLength={1}
+                          value={digit}
+                          onChange={e => handleOtpChange(i, e.target.value)}
+                          onKeyDown={e => handleOtpKeyDown(i, e)}
+                          className={`w-11 h-13 text-center text-xl font-bold rounded-xl border-2 focus:outline-none transition-all ${
+                            otpError
+                              ? 'border-red-400 bg-red-50 text-red-600'
+                              : digit
+                              ? 'border-cafe-gold bg-cafe-ivory text-cafe-espresso'
+                              : 'border-cafe-cream bg-cafe-ivory text-cafe-espresso focus:border-cafe-gold'
+                          }`}
+                        />
+                      ))}
+                    </motion.div>
+
+                    {otpError && (
+                      <p className="text-red-500 text-xs font-medium text-center mb-3 flex items-center justify-center gap-1">
+                        <X size={12} /> {otpError}
+                      </p>
+                    )}
+
+                    <button
+                      onClick={handleOtpVerify}
+                      className="w-full py-3.5 bg-cafe-espresso text-cafe-ivory font-semibold text-base rounded-2xl hover:bg-cafe-cocoa transition-colors active:scale-95 mb-3"
+                    >
+                      Bestätigen
+                    </button>
+
+                    <button
+                      onClick={() => { setDialogStep('phone'); setOtpError(null); }}
+                      className="w-full text-sm text-cafe-text/50 hover:text-cafe-espresso transition-colors text-center"
+                    >
+                      ← Nummer ändern
+                    </button>
+                  </motion.div>
+                )}
+
+              </AnimatePresence>
             </motion.div>
           </>
         )}

@@ -26,14 +26,12 @@ describe('Visit Component', () => {
     // Submit form → phone dialog appears
     fireEvent.click(screen.getByText('reservation.submit'));
 
-    // Fill in phone number and confirm
+    // Phone step: fill number and send code
     fireEvent.change(screen.getByPlaceholderText(/\+49/), { target: { value: '+49 151 12345678' } });
-    fireEvent.click(screen.getByText('Bestätigen'));
+    fireEvent.click(screen.getByText('Code senden'));
 
-    // Form should be gone, summary should be visible
-    expect(screen.getByText(/Max Mustermann/)).toBeInTheDocument();
-    expect(screen.getByText(/2026-08-01/)).toBeInTheDocument();
-    expect(screen.getByText(/reservation.copy/)).toBeInTheDocument();
+    // OTP step should now be visible
+    expect(screen.getByText('Code eingeben')).toBeInTheDocument();
   });
 
   it('displays correct opening hours', () => {
