@@ -230,7 +230,7 @@ export const Header: React.FC = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="fixed inset-0 bg-cafe-espresso/60 backdrop-blur-sm z-40 lg:hidden"
+              className="fixed inset-0 bg-cafe-espresso/60 backdrop-blur-sm z-[55] lg:hidden"
               onClick={() => setMobileMenuOpen(false)}
             />
 
@@ -240,7 +240,7 @@ export const Header: React.FC = () => {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 28, stiffness: 280 }}
-              className="fixed top-0 right-0 h-full w-[85vw] max-w-sm bg-cafe-ivory z-50 lg:hidden flex flex-col shadow-2xl"
+              className="fixed top-0 right-0 h-[100dvh] w-[85vw] max-w-sm bg-cafe-ivory z-[60] lg:hidden flex flex-col shadow-2xl overflow-hidden"
             >
               {/* Drawer Header */}
               <div className="flex items-center justify-between px-6 py-5 border-b border-cafe-cream/60">
@@ -255,7 +255,7 @@ export const Header: React.FC = () => {
               </div>
 
               {/* Nav Links */}
-              <nav className="flex-1 flex flex-col px-6 py-8 gap-1 overflow-y-auto">
+              <nav className="flex-1 flex flex-col px-6 py-8 gap-1 overflow-y-auto bg-cafe-ivory">
                 {navLinks.map((link, i) => {
                   const isActive = location.pathname === '/' && activeHash === link.hash;
                   return (
