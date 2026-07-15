@@ -10,11 +10,11 @@ export const Hero: React.FC = () => {
   const { t } = useTranslation();
   return (
     <section id="home-hero" className="relative min-h-[100svh] flex flex-col justify-center pt-20 md:pt-24 pb-10 md:pb-16 overflow-hidden">
-      <div className="container mx-auto px-4 md:px-6 flex-1 flex flex-col sm:flex-row items-center gap-6 sm:gap-10 lg:gap-20">
+      <div className="container mx-auto px-4 md:px-6 sm:flex-1 flex flex-col sm:flex-row items-center gap-6 sm:gap-10 lg:gap-20">
         
         {/* Text Content */}
         <motion.div 
-          className="flex-grow-0 sm:flex-1 w-full flex flex-col items-start"
+          className="grow-0 sm:flex-1 w-full flex flex-col items-start"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
