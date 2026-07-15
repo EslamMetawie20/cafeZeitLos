@@ -10,11 +10,11 @@ export const Hero: React.FC = () => {
   const { t } = useTranslation();
   return (
     <section id="home-hero" className="relative min-h-[100svh] flex flex-col justify-center pt-20 md:pt-24 pb-10 md:pb-16 overflow-hidden">
-      <div className="container mx-auto px-4 md:px-6 flex-1 flex flex-col lg:flex-row items-center gap-6 lg:gap-20">
+      <div className="container mx-auto px-4 md:px-6 flex-1 flex flex-col md:flex-row items-center gap-6 md:gap-10 lg:gap-20">
         
         {/* Text Content */}
         <motion.div 
-          className="flex-grow-0 lg:flex-1 w-full flex flex-col items-start"
+          className="flex-grow-0 md:flex-1 w-full flex flex-col items-start"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
@@ -89,7 +89,7 @@ export const Hero: React.FC = () => {
 
         {/* Hero Image */}
         <motion.div 
-          className="w-full max-w-md lg:max-w-none relative h-48 sm:h-64 lg:h-auto lg:flex-1 aspect-[4/3] lg:aspect-square group z-0 mt-4 lg:mt-0"
+          className="w-full max-w-md md:max-w-none relative h-48 sm:h-64 md:h-auto md:flex-1 aspect-[4/3] md:aspect-square group z-0 mt-4 md:mt-0"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
@@ -98,7 +98,7 @@ export const Hero: React.FC = () => {
             <img 
               src={heroImage} 
               alt="Café Zeitlos Frühstück - Cappuccino und Croissant"
-              className="w-full h-full object-contain mix-blend-multiply drop-shadow-2xl scale-100 sm:scale-125 md:scale-[1.3] lg:scale-[1.35] xl:scale-[1.5] origin-center lg:origin-right translate-x-0 sm:translate-x-4 lg:translate-x-12 xl:translate-x-20"
+              className="w-full h-full object-contain mix-blend-multiply drop-shadow-2xl scale-100 sm:scale-125 md:scale-[1.3] lg:scale-[1.35] xl:scale-[1.5] origin-center md:origin-right translate-x-0 sm:translate-x-4 md:translate-x-6 lg:translate-x-12 xl:translate-x-20"
               loading="eager"
             />
           </div>
