@@ -17,10 +17,6 @@ vi.mock('react-i18next', () => ({
   }),
 }));
 
-vi.mock('../../contexts/AuthContext', () => ({
-  useAuth: () => ({ user: null })
-}));
-
 describe('Header Component', () => {
   beforeEach(() => {
     currentLanguage = 'de';

@@ -2,30 +2,9 @@ import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 // Layouts
 import { PublicLayout } from './components/layout/PublicLayout';
-import { AdminLayout } from './components/layout/AdminLayout';
-import { StaffLayout } from './components/layout/StaffLayout';
-import { CustomerLayout } from './components/layout/CustomerLayout';
-import { RoleGuard } from './components/auth/RoleGuard';
 
 // Public Pages
 import { Home } from './pages/public/Home';
-import { Login } from './pages/public/Login';
-import { Register } from './pages/public/Register';
-
-// Admin Pages
-import { AdminDashboard } from './pages/admin/AdminDashboard';
-import { AdminOrders } from './pages/admin/AdminOrders';
-import { AdminReservations } from './pages/admin/AdminReservations';
-import { AdminMenu } from './pages/admin/AdminMenu';
-import { AdminAnalytics } from './pages/admin/AdminAnalytics';
-import { AdminTeam } from './pages/admin/AdminTeam';
-import { AdminSettings } from './pages/admin/AdminSettings';
-
-// Staff Pages
-import { StaffDashboard } from './pages/staff/StaffDashboard';
-
-// Customer Pages
-import { CustomerDashboard } from './pages/customer/CustomerDashboard';
 
 export function AppRoutes() {
   return (
@@ -40,41 +19,6 @@ export function AppRoutes() {
         <Route path="/gallery" element={<Navigate to="/#galerie" replace />} />
         <Route path="/about" element={<Navigate to="/#ueber-uns" replace />} />
         <Route path="/visit" element={<Navigate to="/#besuch-planen" replace />} />
-        
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-      </Route>
-
-      {/* Admin Routes */}
-      <Route element={<RoleGuard allowedRoles={['admin']} />}>
-        <Route path="/admin" element={<AdminLayout />}>
-          <Route index element={<AdminDashboard />} />
-          <Route path="orders" element={<AdminOrders />} />
-          <Route path="reservations" element={<AdminReservations />} />
-          <Route path="menu" element={<AdminMenu />} />
-          <Route path="analytics" element={<AdminAnalytics />} />
-          <Route path="team" element={<AdminTeam />} />
-          <Route path="settings" element={<AdminSettings />} />
-        </Route>
-      </Route>
-
-      {/* Staff Routes */}
-      <Route element={<RoleGuard allowedRoles={['staff', 'admin']} />}>
-        <Route path="/staff" element={<StaffLayout />}>
-          <Route index element={<StaffDashboard />} />
-          <Route path="reservations" element={<div>Staff Reservations</div>} />
-          <Route path="availability" element={<div>Staff Availability</div>} />
-        </Route>
-      </Route>
-
-      {/* Customer Routes */}
-      <Route element={<RoleGuard allowedRoles={['customer']} />}>
-        <Route path="/account" element={<CustomerLayout />}>
-          <Route index element={<CustomerDashboard />} />
-          <Route path="menu" element={<div>Customer Menu</div>} />
-          <Route path="favorites" element={<div>Customer Favorites</div>} />
-          <Route path="profile" element={<div>Customer Profile</div>} />
-        </Route>
       </Route>
 
       {/* Catch all */}
