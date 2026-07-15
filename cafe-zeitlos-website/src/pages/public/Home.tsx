@@ -30,8 +30,8 @@ export function Home() {
       <div id="speisekarte"><FullMenu /></div>
       <div id="highlights"><PopularDishes /></div>
       <div id="galerie"><Gallery /></div>
-      <div id="ueber-uns"><About /></div>
       <div id="besuch-planen"><Visit /></div>
+      <div id="ueber-uns"><About /></div>
     </>
   );
 }

@@ -50,8 +50,8 @@ describe('App Routing', () => {
     expect(sections[1].id).toBe('menu'); // FullMenu uses id="menu" internally
     expect(sections[2].id).toBe('highlights');
     expect(sections[3].id).toBe('galerie');
-    expect(sections[4].id).toBe('about');
-    expect(sections[5].id).toBe('visit');
+    expect(sections[4].id).toBe('visit');
+    expect(sections[5].id).toBe('about');
   });
 
   it('contains correct Hero text', () => {

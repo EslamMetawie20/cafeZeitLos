@@ -95,8 +95,8 @@ export const Header: React.FC = () => {
     { name: t('nav.menu'), path: '/', hash: '#speisekarte' },
     { name: t('nav.highlights'), path: '/', hash: '#highlights' },
     { name: t('nav.gallery'), path: '/', hash: '#galerie' },
-    { name: t('nav.about'), path: '/', hash: '#ueber-uns' },
     { name: t('nav.visit'), path: '/', hash: '#besuch-planen' },
+    { name: t('nav.about'), path: '/', hash: '#ueber-uns' },
   ];
 
   const getLoginText = () => {

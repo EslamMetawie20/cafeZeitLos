@@ -2,6 +2,8 @@
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 
+import aboutImage from '../assets/cafe-zeitlos-about-interior.webp';
+
 export const About: React.FC = () => {
   const { t } = useTranslation();
 
@@ -11,16 +13,16 @@ export const About: React.FC = () => {
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
           <motion.div 
             className="flex-1 w-full"
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8 }}
           >
-            <div className="relative aspect-[4/5] max-w-md mx-auto lg:mx-0 rounded-3xl overflow-hidden shadow-2xl border-4 border-cafe-cocoa bg-cafe-cocoa">
+            <div className="relative aspect-[4/5] w-full max-w-md mx-auto lg:max-w-none rounded-3xl overflow-hidden shadow-2xl shadow-black/40 group">
               <img 
-                src={`${import.meta.env.BASE_URL}images/placeholders/hero-lotus-pancakes.svg`} 
-                alt="Café Zeitlos Atmosphäre" 
-                className="w-full h-full object-cover opacity-80 mix-blend-luminosity hover:mix-blend-normal transition-all duration-700"
+                src={aboutImage} 
+                alt={t('about.image_alt')} 
+                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
                 loading="lazy"
               />
             </div>

@@ -14,6 +14,7 @@ Alle Bilder in der Demo stammen von **Unsplash** (freie Lizenz). Sie wurden auto
 - **Croffles**: u.a. Food Photographer
 - **Hero Image**: Chad Montano (Lotus Pancakes)
 - **Galerie-Bilder**: Diverse Architektur/Café-Fotografen
+- **About Section**: Demo-Bild (cafe-zeitlos-demo-interior.webp) aus Downloads (temporär / intern markiert)
 
 ## Skripte
 - `scripts/download-demo-images.mjs`: Script zum Herunterladen der Bilder via Unsplash-IDs und WebP-Konvertierung (mit Sharp).

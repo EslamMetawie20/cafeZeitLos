@@ -13,6 +13,6 @@ describe('Hero Component', () => {
   it('renders hero content', () => {
     render(<Hero />);
 
-    expect(screen.getByText('Besuch planen')).toBeInTheDocument();
+    expect(screen.getByText('hero.cta_visit')).toBeInTheDocument();
   });
 });
