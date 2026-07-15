@@ -14,7 +14,7 @@ export const Hero: React.FC = () => {
         
         {/* Hero Image */}
         <motion.div 
-          className="w-full max-w-md sm:max-w-none relative h-48 sm:h-auto sm:flex-1 sm:aspect-square group z-0 mt-4 sm:mt-0"
+          className="w-full max-w-md sm:max-w-none relative h-64 sm:h-auto sm:flex-1 sm:aspect-square group z-0 mt-4 sm:mt-0"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
