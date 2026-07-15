@@ -9,7 +9,7 @@ export const Gallery: React.FC = () => {
     <section id="galerie" className="py-24 bg-cafe-ivory overflow-hidden">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-12">
-          <h2 className="font-heading text-4xl md:text-5xl font-bold text-cafe-espresso mb-4">
+          <h2 className="font-heading text-[clamp(2rem,6vw,3rem)] font-bold text-cafe-espresso mb-4">
             {t('gallery.title')}
           </h2>
           <div className="w-20 h-1 bg-cafe-gold rounded-full mx-auto"></div>

@@ -15,7 +15,7 @@ export const PopularDishes: React.FC = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div>
-            <h2 className="font-heading text-4xl md:text-5xl font-bold text-cafe-espresso mb-4">
+            <h2 className="font-heading text-[clamp(2rem,6vw,3rem)] font-bold text-cafe-espresso mb-4">
               {t('popular.title')}
             </h2>
             <div className="w-20 h-1 bg-cafe-gold rounded-full"></div>

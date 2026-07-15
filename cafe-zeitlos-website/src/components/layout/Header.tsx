@@ -97,12 +97,35 @@ export const Header: React.FC = () => {
     { name: t('nav.about'), path: '/', hash: '#ueber-uns' },
   ];
 
+  const [currentUser, setCurrentUser] = useState<any>(null);
+
+  useEffect(() => {
+    const checkUser = () => {
+      const userStr = localStorage.getItem('cz_user');
+      setCurrentUser(userStr ? JSON.parse(userStr) : null);
+    };
+    checkUser();
+    
+    window.addEventListener('storage', checkUser);
+    return () => window.removeEventListener('storage', checkUser);
+  }, []);
+
+  const handleLoginClick = (e: React.MouseEvent) => {
+    if (currentUser) {
+      e.preventDefault();
+      localStorage.removeItem('cz_user');
+      setCurrentUser(null);
+      window.dispatchEvent(new Event('storage'));
+      navigate('/');
+    }
+  };
+
   const getLoginText = () => {
-    return t('nav.login');
+    return currentUser ? (i18n.language === 'de' ? 'Abmelden' : 'Logout') : t('nav.login');
   };
 
   const getLoginPath = () => {
-    return '/login';
+    return currentUser ? '/' : '/login';
   };
 
   const isAuthPage = location.pathname === '/login' || location.pathname === '/register';
@@ -177,6 +200,7 @@ export const Header: React.FC = () => {
             </button>
             <Link 
               to={getLoginPath()}
+              onClick={handleLoginClick}
               className="flex items-center gap-2 text-sm font-medium bg-cafe-terracotta text-white hover:bg-cafe-terracotta/90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-gold rounded-full px-5 py-2.5 shadow-sm active:scale-95"
             >
               <User size={16} />
@@ -221,7 +245,10 @@ export const Header: React.FC = () => {
               
               <Link
                 to={getLoginPath()}
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={(e) => {
+                  handleLoginClick(e);
+                  setMobileMenuOpen(false);
+                }}
                 className="py-4 mt-2 mb-2 text-lg font-medium bg-cafe-terracotta text-white rounded-xl px-4 flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-gold active:scale-95 transition-transform min-h-[44px]"
               >
                 <User size={20} />

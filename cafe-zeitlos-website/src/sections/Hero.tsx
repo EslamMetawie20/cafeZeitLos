@@ -21,7 +21,7 @@ export const Hero: React.FC = () => {
         >
 
           
-          <h1 className="font-heading text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.1] mb-6 text-cafe-espresso">
+          <h1 className="font-heading text-[clamp(2.5rem,8vw,5.5rem)] font-bold leading-[1.1] mb-6 text-cafe-espresso">
             {t('hero.title_line1')}<br />
             {t('hero.title_line2')}<br />
             {t('hero.title_line3')}

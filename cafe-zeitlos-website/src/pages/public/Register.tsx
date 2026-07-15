@@ -97,11 +97,10 @@ export function Register() {
     
     // Store user
     const newUser = {
-      id: `customer-${Date.now()}`,
+      id: `user-${Date.now()}`,
       name: `${firstName.trim()} ${lastName.trim()}`,
       email: email.trim().toLowerCase(),
-      password: password, // For demo validation purposes
-      role: 'customer'
+      password: password // For demo validation purposes
     };
 
     const storedUsersStr = localStorage.getItem('cz_registered_users');

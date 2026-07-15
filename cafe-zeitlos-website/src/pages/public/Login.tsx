@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Eye, EyeOff, CheckCircle2 } from 'lucide-react';
+import { Eye, EyeOff, ArrowLeft, CheckCircle2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export function Login() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
   const location = useLocation();
   
   const [email, setEmail] = useState('');
@@ -36,8 +37,31 @@ export function Login() {
     // Simulate network delay
     await new Promise(r => setTimeout(r, 800));
     
-    setError(t('auth.error_invalid_credentials'));
-    setIsLoggingIn(false);
+    const storedUsersStr = localStorage.getItem('cz_registered_users');
+    const storedUsers = storedUsersStr ? JSON.parse(storedUsersStr) : [];
+    
+    // Fallback default users
+    const defaultUsers = [
+      { email: 'user@example.com', password: 'Password123' },
+      { email: 'admin@cafe-zeitlos.de', password: 'Password123' },
+      { email: 'staff@cafe-zeitlos.de', password: 'Password123' },
+      { email: 'sarah@example.com', password: 'Password123' }
+    ];
+    
+    const foundUser = [...defaultUsers, ...storedUsers].find(
+      u => u.email.toLowerCase() === email.trim().toLowerCase() && u.password === password
+    );
+    
+    if (foundUser) {
+      localStorage.setItem('cz_user', JSON.stringify({ email: foundUser.email, name: foundUser.name || 'User' }));
+      // Dispatch storage event to notify header
+      window.dispatchEvent(new Event('storage'));
+      setIsLoggingIn(false);
+      navigate('/');
+    } else {
+      setError(t('auth.error_invalid_credentials'));
+      setIsLoggingIn(false);
+    }
   };
 
   return (
@@ -56,9 +80,19 @@ export function Login() {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="w-full bg-[#fef9f1]/95 backdrop-blur-xl rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] p-8 md:p-10 border border-white/20 flex flex-col items-center"
+          className="w-full bg-[#fef9f1]/95 backdrop-blur-xl rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] p-8 md:p-10 border border-white/20 flex flex-col items-center relative"
         >
-          <div className="mb-8 text-center">
+          {/* Language Switcher */}
+          <button 
+            type="button"
+            onClick={() => i18n.changeLanguage(i18n.language === 'de' ? 'en' : 'de')}
+            className="absolute top-4 right-4 text-xs font-semibold px-3 py-1.5 bg-[#d8c2b9]/25 hover:bg-[#d8c2b9]/40 text-[#685c54] rounded-full transition-all focus:outline-none flex items-center gap-1.5"
+            aria-label={t('nav.switch_language')}
+          >
+            <span>{i18n.language === 'de' ? '🇬🇧 EN' : '🇩🇪 DE'}</span>
+          </button>
+
+          <div className="mb-8 text-center mt-4">
             <h2 className="text-2xl font-serif font-bold text-[#2c1e16] mb-2">{t('auth.login_title')}</h2>
             <div className="w-12 h-1 bg-[#8b4c2f] mx-auto rounded-full opacity-80"></div>
           </div>
@@ -142,6 +176,17 @@ export function Login() {
                 {t('auth.register_now')}
               </Link>
             </p>
+          </div>
+
+          {/* Back to Website */}
+          <div className="mt-8 text-center w-full pt-6 border-t border-[#d8c2b9]/30">
+            <button 
+              onClick={() => navigate('/')}
+              className="inline-flex items-center gap-2 text-[#685c54] hover:text-[#8b4c2f] transition-colors border-b border-transparent hover:border-[#8b4c2f] pb-1 text-sm font-semibold focus:outline-none"
+            >
+              <ArrowLeft size={16} />
+              {t('auth.back')}
+            </button>
           </div>
         </motion.div>
       </main>

@@ -35,7 +35,7 @@ export const About: React.FC = () => {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-cafe-ivory">
+            <h2 className="font-heading text-[clamp(2rem,6vw,3rem)] font-bold mb-6 text-cafe-ivory">
               {t('about.title')}
             </h2>
             <div className="w-20 h-1 bg-cafe-gold rounded-full mb-8"></div>
