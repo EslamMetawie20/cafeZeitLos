@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { MapPin, Phone, Clock, Copy, Camera, Info } from 'lucide-react';
+import { MapPin, Phone, Clock, Copy, Camera, Info, Calendar, User, MessageSquare, Check } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { type ReservationRequest } from '../types';
 
@@ -16,6 +16,7 @@ export const Visit: React.FC = () => {
   });
   
   const [isGenerated, setIsGenerated] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
 
   const handleGenerate = (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,7 +29,8 @@ export const Visit: React.FC = () => {
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(getSummaryText());
-    alert('Kopiert!');
+    setIsCopied(true);
+    setTimeout(() => setIsCopied(false), 2000);
   };
 
   return (
@@ -165,28 +167,98 @@ export const Visit: React.FC = () => {
                 </div>
               </form>
             ) : (
-              <div className="animate-in fade-in zoom-in duration-500">
-                <div className="bg-amber-50 border-l-4 border-amber-400 p-4 mb-6 rounded-r-xl flex items-start gap-3">
-                  <Info className="text-amber-500 mt-0.5 flex-shrink-0" size={20} />
-                  <p className="text-sm text-amber-800 font-medium leading-relaxed">
-                    Dies ist noch keine bestätigte Reservierung. Kopiere die Anfrage und kontaktiere das Café per Instagram oder Telefon, um den Tisch zu bestätigen.
-                  </p>
+              <div className="animate-in fade-in zoom-in duration-500 space-y-6">
+                {/* Custom Elegant Notice */}
+                <div className="bg-[#fffcf6] border border-[#f3e1cc] p-5 rounded-2xl flex items-start gap-3 shadow-sm">
+                  <Info className="text-cafe-gold mt-0.5 flex-shrink-0" size={20} />
+                  <div>
+                    <h4 className="font-bold text-cafe-espresso text-sm mb-1 uppercase tracking-wider">
+                      Reservierungsanfrage
+                    </h4>
+                    <p className="text-sm text-[#735b40] leading-relaxed">
+                      Dies ist noch keine bestätigte Reservierung. Bitte kopiere deine Anfrage und kontaktiere das Café per Instagram oder Telefon, um deinen Tisch zu bestätigen.
+                    </p>
+                  </div>
                 </div>
 
-                <div className="bg-cafe-ivory p-6 rounded-2xl border border-cafe-cream mb-6 whitespace-pre-wrap font-mono text-sm text-cafe-text/90">
-                  {getSummaryText()}
+                {/* Structured Overview Card */}
+                <div className="bg-cafe-ivory/50 border border-cafe-cream rounded-2xl p-6 shadow-sm space-y-4">
+                  <div className="flex items-center justify-between pb-3 border-b border-cafe-cream/60">
+                    <span className="font-serif italic font-semibold text-cafe-espresso text-lg">Zusammenfassung</span>
+                    <span className="text-xs bg-cafe-gold/20 text-[#735b40] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">Entwurf</span>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="flex items-center gap-3 bg-white/60 p-3 rounded-xl border border-cafe-cream/30">
+                      <div className="w-9 h-9 rounded-lg bg-cafe-cream/40 flex items-center justify-center text-cafe-espresso">
+                        <User size={18} />
+                      </div>
+                      <div>
+                        <span className="text-[10px] uppercase tracking-wider text-cafe-text/60 block font-bold">Name</span>
+                        <span className="text-sm font-semibold text-cafe-espresso">{formData.name}</span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-3 bg-white/60 p-3 rounded-xl border border-cafe-cream/30">
+                      <div className="w-9 h-9 rounded-lg bg-cafe-cream/40 flex items-center justify-center text-cafe-espresso">
+                        <Calendar size={18} />
+                      </div>
+                      <div>
+                        <span className="text-[10px] uppercase tracking-wider text-cafe-text/60 block font-bold">Datum</span>
+                        <span className="text-sm font-semibold text-cafe-espresso">{formData.date}</span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-3 bg-white/60 p-3 rounded-xl border border-cafe-cream/30">
+                      <div className="w-9 h-9 rounded-lg bg-cafe-cream/40 flex items-center justify-center text-cafe-espresso">
+                        <Clock size={18} />
+                      </div>
+                      <div>
+                        <span className="text-[10px] uppercase tracking-wider text-cafe-text/60 block font-bold">Uhrzeit</span>
+                        <span className="text-sm font-semibold text-cafe-espresso">{formData.time} Uhr</span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-3 bg-white/60 p-3 rounded-xl border border-cafe-cream/30">
+                      <div className="w-9 h-9 rounded-lg bg-cafe-cream/40 flex items-center justify-center text-cafe-espresso">
+                        <User size={18} />
+                      </div>
+                      <div>
+                        <span className="text-[10px] uppercase tracking-wider text-cafe-text/60 block font-bold">Gäste</span>
+                        <span className="text-sm font-semibold text-cafe-espresso">{formData.guests} Personen</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {formData.note && (
+                    <div className="flex gap-3 bg-white/60 p-4 rounded-xl border border-cafe-cream/30">
+                      <div className="w-9 h-9 rounded-lg bg-cafe-cream/40 flex items-center justify-center text-cafe-espresso shrink-0">
+                        <MessageSquare size={18} />
+                      </div>
+                      <div className="flex-1">
+                        <span className="text-[10px] uppercase tracking-wider text-cafe-text/60 block font-bold">Notiz</span>
+                        <span className="text-sm text-cafe-text leading-normal block whitespace-pre-wrap">{formData.note}</span>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
+                {/* Actions Grid */}
                 <div className="flex flex-col gap-3">
-                  <Button onClick={copyToClipboard} variant="secondary" className="gap-2">
-                    <Copy size={20} />
-                    {t('reservation.copy')}
+                  <Button 
+                    onClick={copyToClipboard} 
+                    variant={isCopied ? "primary" : "secondary"} 
+                    fullWidth
+                    className={`gap-2 h-12 text-base transition-all rounded-full flex items-center justify-center ${isCopied ? '!bg-green-700 !text-white hover:!bg-green-800' : ''}`}
+                  >
+                    {isCopied ? <Check size={18} /> : <Copy size={18} />}
+                    {isCopied ? 'Angaben kopiert!' : t('reservation.copy')}
                   </Button>
                   <div className="grid grid-cols-2 gap-3">
                     <Button 
                       variant="outline" 
                       onClick={() => window.open('https://www.instagram.com/cafezeitlos_bs/', '_blank')}
-                      className="gap-2"
+                      className="gap-2 h-12 rounded-full"
                     >
                       <Camera size={18} />
                       Instagram
@@ -194,7 +266,7 @@ export const Visit: React.FC = () => {
                     <Button 
                       variant="outline" 
                       onClick={() => window.open('tel:+4953112885768')}
-                      className="gap-2"
+                      className="gap-2 h-12 rounded-full"
                     >
                       <Phone size={18} />
                       Anrufen
