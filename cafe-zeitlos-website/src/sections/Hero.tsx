@@ -14,7 +14,7 @@ export const Hero: React.FC = () => {
         
         {/* Hero Image */}
         <motion.div 
-          className="w-full max-w-md sm:max-w-none relative h-64 sm:h-auto sm:flex-1 sm:aspect-square group z-0 mt-4 sm:mt-0"
+          className="w-full max-w-md sm:max-w-none relative h-80 sm:h-auto sm:flex-1 sm:aspect-square group z-0 mt-4 sm:mt-0"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
@@ -39,12 +39,12 @@ export const Hero: React.FC = () => {
 
           
           <h1 className="font-heading text-[clamp(2.25rem,8vw,5.5rem)] font-bold leading-[1.1] mb-4 md:mb-6 text-cafe-espresso w-full text-center sm:text-left">
-            {t('hero.title_line1')}<br />
-            {t('hero.title_line2')}<br />
+            {t('hero.title_line1')}<br className="hidden sm:inline" />
+            {t('hero.title_line2')}<br className="hidden sm:inline" />
             {t('hero.title_line3')}
           </h1>
           
-          <p className="text-base md:text-xl text-cafe-text opacity-90 max-w-lg mb-4 md:mb-8 text-balance mx-auto sm:mx-0 text-center sm:text-left">
+          <p className="text-base md:text-xl text-cafe-text opacity-90 max-w-lg mb-4 md:mb-8 sm:text-balance mx-auto sm:mx-0 text-center sm:text-left">
             {t('hero.description')}
           </p>
           
