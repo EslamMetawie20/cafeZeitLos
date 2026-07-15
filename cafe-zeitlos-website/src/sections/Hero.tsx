@@ -10,30 +10,48 @@ export const Hero: React.FC = () => {
   const { t } = useTranslation();
   return (
     <section id="home-hero" className="relative min-h-[100svh] flex flex-col justify-center pt-20 md:pt-24 pb-10 md:pb-16 overflow-hidden">
-      <div className="container mx-auto px-4 md:px-6 sm:flex-1 flex flex-col sm:flex-row items-center gap-6 sm:gap-10 lg:gap-20">
+      <div className="container mx-auto px-4 md:px-6 sm:flex-1 flex flex-col sm:flex-row-reverse items-center gap-6 sm:gap-10 lg:gap-20">
         
+        {/* Hero Image */}
+        <motion.div 
+          className="w-full max-w-md sm:max-w-none relative h-48 sm:h-auto sm:flex-1 sm:aspect-square group z-0 mt-4 sm:mt-0"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+        >
+          <div className="relative w-full h-full flex items-center justify-center transition-transform duration-700 ease-out group-hover:scale-[1.03] motion-safe:hover:-translate-y-2">
+            <img 
+              src={heroImage} 
+              alt="Café Zeitlos Frühstück - Cappuccino und Croissant"
+              className="w-full h-full object-contain mix-blend-multiply drop-shadow-2xl scale-100 sm:scale-125 md:scale-[1.3] lg:scale-[1.35] xl:scale-[1.5] origin-center sm:origin-right translate-x-0 sm:translate-x-4 md:translate-x-6 lg:translate-x-12 xl:translate-x-20"
+              loading="eager"
+            />
+          </div>
+        </motion.div>
+
         {/* Text Content */}
         <motion.div 
-          className="grow-0 sm:flex-1 w-full flex flex-col items-start"
+          className="grow-0 sm:flex-1 w-full flex flex-col items-center sm:items-start text-center sm:text-left"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
 
           
-          <h1 className="font-heading text-[clamp(2.25rem,8vw,5.5rem)] font-bold leading-[1.1] mb-4 md:mb-6 text-cafe-espresso">
+          <h1 className="font-heading text-[clamp(2.25rem,8vw,5.5rem)] font-bold leading-[1.1] mb-4 md:mb-6 text-cafe-espresso w-full text-center sm:text-left">
             {t('hero.title_line1')}<br />
             {t('hero.title_line2')}<br />
             {t('hero.title_line3')}
           </h1>
           
-          <p className="text-base md:text-xl text-cafe-text opacity-90 max-w-lg mb-4 md:mb-8 text-balance">
+          <p className="text-base md:text-xl text-cafe-text opacity-90 max-w-lg mb-4 md:mb-8 text-balance mx-auto sm:mx-0 text-center sm:text-left">
             {t('hero.description')}
           </p>
           
-          <div className="flex flex-col sm:flex-row w-full sm:w-auto gap-3 md:gap-4 mb-6 md:mb-10">
+          <div className="flex flex-col sm:flex-row w-full sm:w-auto gap-3 md:gap-4 mb-6 md:mb-10 items-center sm:items-start justify-center sm:justify-start">
             <Button 
               size="lg" 
+              className="w-full sm:w-auto"
               onClick={() => {
                 const el = document.getElementById('visit');
                 if (el) {
@@ -52,7 +70,7 @@ export const Hero: React.FC = () => {
             <Button 
               variant="outline" 
               size="lg"
-              className="gap-2"
+              className="gap-2 w-full sm:w-auto"
               onClick={() => {
                 const el = document.getElementById('highlights');
                 if (el) {
@@ -70,13 +88,13 @@ export const Hero: React.FC = () => {
             </Button>
           </div>
 
-          <div className="flex flex-col gap-1.5 md:gap-2 text-sm font-medium text-cafe-text/80">
+          <div className="flex flex-col gap-1.5 md:gap-2 text-sm font-medium text-cafe-text/80 items-center sm:items-start w-full">
             <div className="flex items-center gap-2">
               <MapPin size={18} className="text-cafe-terracotta" />
               <span>{t('hero.address')}</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-cafe-terracotta ml-1.5 mr-1"></span>
+              <span className="w-1.5 h-1.5 rounded-full bg-cafe-terracotta ml-1.5 mr-1 hidden sm:inline-block"></span>
               <span>{t('hero.hours')}</span>
             </div>
             <div className="flex items-center gap-2 mt-1 md:mt-2">
@@ -84,23 +102,6 @@ export const Hero: React.FC = () => {
                 {t('hero.halal')}
               </span>
             </div>
-          </div>
-        </motion.div>
-
-        {/* Hero Image */}
-        <motion.div 
-          className="w-full max-w-md sm:max-w-none relative h-48 sm:h-auto sm:flex-1 sm:aspect-square group z-0 mt-4 sm:mt-0"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-        >
-          <div className="relative w-full h-full flex items-center justify-center transition-transform duration-700 ease-out group-hover:scale-[1.03] motion-safe:hover:-translate-y-2">
-            <img 
-              src={heroImage} 
-              alt="Café Zeitlos Frühstück - Cappuccino und Croissant"
-              className="w-full h-full object-contain mix-blend-multiply drop-shadow-2xl scale-100 sm:scale-125 md:scale-[1.3] lg:scale-[1.35] xl:scale-[1.5] origin-center sm:origin-right translate-x-0 sm:translate-x-4 md:translate-x-6 lg:translate-x-12 xl:translate-x-20"
-              loading="eager"
-            />
           </div>
         </motion.div>
       </div>
