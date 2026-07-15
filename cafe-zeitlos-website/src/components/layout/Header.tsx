@@ -113,10 +113,14 @@ export const Header: React.FC = () => {
     return '/account';
   };
 
+  const isAuthPage = location.pathname === '/login' || location.pathname === '/register';
+
   return (
     <header 
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-cafe-ivory/95 backdrop-blur-md shadow-sm py-3' : 'bg-transparent py-5'
+        isScrolled || isAuthPage 
+          ? 'bg-cafe-ivory/95 backdrop-blur-md shadow-sm py-3' 
+          : 'bg-transparent py-5'
       }`}
     >
       <div className="container mx-auto px-4 md:px-6">

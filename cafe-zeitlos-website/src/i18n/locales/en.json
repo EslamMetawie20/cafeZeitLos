@@ -164,6 +164,34 @@
       "admin_pause_orders": "Pause Order Intake",
       "admin_trend_week": "vs. last week",
       "admin_trend_stable": "Stable"
+    },
+    "auth": {
+      "login_title": "Sign In",
+      "email": "Email address",
+      "email_placeholder": "example@cafe-zeitlos.de",
+      "password": "Password",
+      "password_placeholder": "••••••••",
+      "no_account": "Don’t have an account yet? ",
+      "register_now": "Register now",
+      "register_title": "Create account",
+      "first_name": "First name",
+      "last_name": "Last name",
+      "confirm_password": "Confirm password",
+      "accept_terms": "I accept the privacy policy and terms of use.",
+      "already_account": "Already have an account? ",
+      "login_now": "Sign in now",
+      "demo_account_created": "Your demo account has been created. You can now sign in.",
+      "error_first_name": "Please enter your first name.",
+      "error_last_name": "Please enter your last name.",
+      "error_email_invalid": "Please enter a valid email address.",
+      "error_email_exists": "A demo account already exists for this email address.",
+      "error_password_length": "The password must contain at least eight characters.",
+      "error_password_uppercase": "The password must contain at least one uppercase letter.",
+      "error_password_lowercase": "The password must contain at least one lowercase letter.",
+      "error_password_number": "The password must contain at least one number.",
+      "error_passwords_match": "The passwords do not match.",
+      "error_terms": "Please accept the privacy policy and terms of use.",
+      "error_invalid_credentials": "Invalid email or password."
     }
   }
 }

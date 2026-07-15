@@ -164,6 +164,34 @@
       "admin_pause_orders": "Bestellannahme pausieren",
       "admin_trend_week": "vs. Vorwoche",
       "admin_trend_stable": "Stabil"
+    },
+    "auth": {
+      "login_title": "Anmelden",
+      "email": "E-Mail-Adresse",
+      "email_placeholder": "beispiel@cafe-zeitlos.de",
+      "password": "Passwort",
+      "password_placeholder": "••••••••",
+      "no_account": "Noch kein Konto? ",
+      "register_now": "Jetzt registrieren",
+      "register_title": "Konto erstellen",
+      "first_name": "Vorname",
+      "last_name": "Nachname",
+      "confirm_password": "Passwort bestätigen",
+      "accept_terms": "Ich akzeptiere die Datenschutzerklärung und die Nutzungsbedingungen.",
+      "already_account": "Bereits ein Konto? ",
+      "login_now": "Jetzt anmelden",
+      "demo_account_created": "Dein Demo-Konto wurde erstellt. Du kannst dich jetzt anmelden.",
+      "error_first_name": "Bitte gib deinen Vornamen ein.",
+      "error_last_name": "Bitte gib deinen Nachnamen ein.",
+      "error_email_invalid": "Bitte gib eine gültige E-Mail-Adresse ein.",
+      "error_email_exists": "Für diese E-Mail-Adresse existiert bereits ein Demo-Konto.",
+      "error_password_length": "Das Passwort muss mindestens acht Zeichen enthalten.",
+      "error_password_uppercase": "Das Passwort muss mindestens einen Großbuchstaben enthalten.",
+      "error_password_lowercase": "Das Passwort muss mindestens einen Kleinbuchstaben enthalten.",
+      "error_password_number": "Das Passwort muss mindestens eine Zahl enthalten.",
+      "error_passwords_match": "Die Passwörter stimmen nicht überein.",
+      "error_terms": "Bitte akzeptiere die Datenschutzerklärung und die Nutzungsbedingungen.",
+      "error_invalid_credentials": "E-Mail oder Passwort ist falsch."
     }
   }
 }

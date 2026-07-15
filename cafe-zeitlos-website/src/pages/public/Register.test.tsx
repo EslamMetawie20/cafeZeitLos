@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
-import { Login } from './Login';
+import { Register } from './Register';
 import { MemoryRouter } from 'react-router-dom';
 import { AuthProvider } from '../../contexts/AuthContext';
 
@@ -12,18 +12,21 @@ vi.mock('react-i18next', () => ({
   }),
 }));
 
-describe('Login Component', () => {
-  it('renders login form', () => {
+describe('Register Component', () => {
+  it('renders register form', () => {
     render(
       <MemoryRouter>
         <AuthProvider>
-          <Login />
+          <Register />
         </AuthProvider>
       </MemoryRouter>
     );
     
+    expect(screen.getByLabelText('auth.first_name')).toBeInTheDocument();
+    expect(screen.getByLabelText('auth.last_name')).toBeInTheDocument();
     expect(screen.getByLabelText('auth.email')).toBeInTheDocument();
     expect(screen.getByLabelText('auth.password')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'auth.login_title' })).toBeInTheDocument();
+    expect(screen.getByLabelText('auth.confirm_password')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'auth.register_title' })).toBeInTheDocument();
   });
 });

@@ -10,6 +10,7 @@ import { RoleGuard } from './components/auth/RoleGuard';
 // Public Pages
 import { Home } from './pages/public/Home';
 import { Login } from './pages/public/Login';
+import { Register } from './pages/public/Register';
 
 // Admin Pages
 import { AdminDashboard } from './pages/admin/AdminDashboard';
@@ -41,6 +42,7 @@ export function AppRoutes() {
         <Route path="/visit" element={<Navigate to="/#besuch-planen" replace />} />
         
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Route>
 
       {/* Admin Routes */}
