@@ -220,82 +220,121 @@ export const Header: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu — Full-Screen Overlay */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div 
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="absolute top-full left-0 w-full bg-cafe-ivory shadow-lg border-t border-cafe-cream lg:hidden overflow-hidden"
-          >
-            <nav className="flex flex-col p-4">
-              {navLinks.map((link) => {
-                const isActive = location.pathname === '/' && activeHash === link.hash;
-                return (
-                  <button 
-                    key={link.name} 
-                    onClick={() => handleNavClick(link.path, link.hash)}
-                    className={`py-4 text-lg font-medium border-b border-cafe-cream last:border-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-gold rounded px-2 text-left flex items-center min-h-[44px] ${isActive ? 'text-cafe-terracotta underline' : 'text-cafe-text'}`}
-                  >
-                    {link.name}
-                  </button>
-                );
-              })}
-              
-              <Link
-                to={getLoginPath()}
-                onClick={(e) => {
-                  handleLoginClick(e);
-                  setMobileMenuOpen(false);
-                }}
-                className="py-4 mt-2 mb-2 text-lg font-medium bg-cafe-terracotta text-white rounded-xl px-4 flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-gold active:scale-95 transition-transform min-h-[44px]"
-              >
-                <User size={20} />
-                {getLoginText()}
-              </Link>
-              
-              <div className="py-4 flex justify-between items-center px-2 border-t border-cafe-cream mt-2">
-                <span className="text-lg font-medium text-cafe-text min-h-[44px] flex items-center">{t('nav.language')}</span>
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 bg-cafe-espresso/60 backdrop-blur-sm z-40 lg:hidden"
+              onClick={() => setMobileMenuOpen(false)}
+            />
+
+            {/* Drawer Panel */}
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 28, stiffness: 280 }}
+              className="fixed top-0 right-0 h-full w-[85vw] max-w-sm bg-cafe-ivory z-50 lg:hidden flex flex-col shadow-2xl"
+            >
+              {/* Drawer Header */}
+              <div className="flex items-center justify-between px-6 py-5 border-b border-cafe-cream/60">
+                <span className="font-heading text-2xl font-semibold text-cafe-espresso tracking-tight">Café Zeitlos</span>
+                <button
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-10 h-10 flex items-center justify-center rounded-full bg-cafe-cream/60 text-cafe-espresso hover:bg-cafe-cream transition-colors"
+                  aria-label="Close menu"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+
+              {/* Nav Links */}
+              <nav className="flex-1 flex flex-col px-6 py-8 gap-1 overflow-y-auto">
+                {navLinks.map((link, i) => {
+                  const isActive = location.pathname === '/' && activeHash === link.hash;
+                  return (
+                    <motion.button
+                      key={link.name}
+                      onClick={() => handleNavClick(link.path, link.hash)}
+                      initial={{ opacity: 0, x: 30 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.06 + 0.1, duration: 0.3 }}
+                      className={`group flex items-center justify-between py-4 text-left font-heading text-2xl font-medium border-b border-cafe-cream/50 last:border-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-gold rounded-sm transition-colors ${
+                        isActive
+                          ? 'text-cafe-terracotta'
+                          : 'text-cafe-espresso hover:text-cafe-terracotta'
+                      }`}
+                    >
+                      <span>{link.name}</span>
+                      <span className={`text-cafe-terracotta transition-transform duration-200 group-hover:translate-x-1 ${
+                        isActive ? 'opacity-100' : 'opacity-0 group-hover:opacity-60'
+                      }`}>→</span>
+                    </motion.button>
+                  );
+                })}
+              </nav>
+
+              {/* Bottom Actions */}
+              <div className="px-6 py-6 border-t border-cafe-cream/60 flex flex-col gap-3">
+                {/* Sign In Button */}
+                <Link
+                  to={getLoginPath()}
+                  onClick={(e) => {
+                    handleLoginClick(e);
+                    setMobileMenuOpen(false);
+                  }}
+                  className="flex items-center justify-center gap-2.5 py-3.5 px-6 bg-cafe-espresso text-cafe-ivory font-semibold text-base rounded-2xl shadow-md active:scale-95 transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-gold"
+                >
+                  <User size={18} />
+                  {getLoginText()}
+                </Link>
+
+                {/* Language Toggle */}
                 <button
                   onClick={() => {
                     toggleLanguage();
                     setMobileMenuOpen(false);
                   }}
-                  className="flex items-center justify-center text-lg font-medium text-cafe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-gold rounded min-w-[44px] min-h-[44px]"
+                  className="flex items-center justify-center gap-2.5 py-3 px-6 bg-cafe-cream/70 text-cafe-espresso font-medium text-base rounded-2xl hover:bg-cafe-cream transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cafe-gold"
                   aria-label={t('nav.switch_language')}
                 >
                   <AnimatePresence mode="wait">
                     {i18n.language === 'de' ? (
-                      <motion.div
+                      <motion.span
                         key="en-mob"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
+                        initial={{ opacity: 0, y: 4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -4 }}
                         transition={{ duration: 0.15 }}
                         className="flex items-center gap-2"
                       >
-                        <span className="text-2xl leading-none" aria-hidden="true">🇬🇧</span>
-                        <span className="uppercase">EN</span>
-                      </motion.div>
+                        <span className="text-xl" aria-hidden="true">🇬🇧</span>
+                        <span>Switch to English</span>
+                      </motion.span>
                     ) : (
-                      <motion.div
+                      <motion.span
                         key="de-mob"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
+                        initial={{ opacity: 0, y: 4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -4 }}
                         transition={{ duration: 0.15 }}
                         className="flex items-center gap-2"
                       >
-                        <span className="text-2xl leading-none" aria-hidden="true">🇩🇪</span>
-                        <span className="uppercase">DE</span>
-                      </motion.div>
+                        <span className="text-xl" aria-hidden="true">🇩🇪</span>
+                        <span>Auf Deutsch wechseln</span>
+                      </motion.span>
                     )}
                   </AnimatePresence>
                 </button>
               </div>
-            </nav>
-          </motion.div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </header>
