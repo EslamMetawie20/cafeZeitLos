@@ -45,11 +45,6 @@ export const FullMenu: React.FC = () => {
             {t('menu.title')}
           </h2>
           <div className="w-20 h-1 bg-cafe-gold rounded-full mx-auto mb-8"></div>
-          
-          {/* Demo Notice */}
-          <div className="inline-block bg-cafe-cream/50 text-cafe-olive text-sm px-4 py-2 rounded-lg border border-cafe-cream mb-8 max-w-2xl text-balance">
-            {t('menu.demo_notice')}
-          </div>
         </div>
 
         {/* Controls */}
