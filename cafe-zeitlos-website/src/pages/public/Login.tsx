@@ -128,46 +128,6 @@ export function Login() {
             </button>
           </form>
 
-          {/* Role Selection Divider */}
-          <div className="w-full flex items-center gap-4 my-8">
-            <div className="flex-1 h-px bg-[#d8c2b9]/40"></div>
-            <span className="text-[#685c54] uppercase text-xs tracking-wider font-semibold">Demo-Zugänge testen</span>
-            <div className="flex-1 h-px bg-[#d8c2b9]/40"></div>
-          </div>
-
-          {/* Role Selection Grid */}
-          <div className="grid grid-cols-3 gap-3 w-full">
-            <button 
-              type="button"
-              onClick={() => fillDemoData('customer')}
-              className={`role-card flex flex-col items-center justify-center p-4 bg-[#f8f3eb] rounded-xl border transition-all duration-300 group
-                ${selectedRole === 'customer-1' ? 'ring-2 ring-[#5e5e48] bg-[#77775f]/20 border-transparent' : 'border-[#d8c2b9]/30 hover:border-[#5e5e48]/50 hover:bg-[#77775f]/10'}
-              `}
-            >
-              <User className={`mb-2 transition-transform group-hover:scale-110 ${selectedRole === 'customer-1' ? 'text-[#1d1c17]' : 'text-[#5e5e48]'}`} size={24} />
-              <span className={`text-xs text-center font-semibold ${selectedRole === 'customer-1' ? 'text-[#1d1c17]' : 'text-[#1d1c17]'}`}>Kunde</span>
-            </button>
-            <button 
-              type="button"
-              onClick={() => fillDemoData('staff')}
-              className={`role-card flex flex-col items-center justify-center p-4 bg-[#f8f3eb] rounded-xl border transition-all duration-300 group
-                ${selectedRole === 'staff-1' ? 'ring-2 ring-[#5e5e48] bg-[#77775f]/20 border-transparent' : 'border-[#d8c2b9]/30 hover:border-[#5e5e48]/50 hover:bg-[#77775f]/10'}
-              `}
-            >
-              <Coffee className={`mb-2 transition-transform group-hover:scale-110 ${selectedRole === 'staff-1' ? 'text-[#1d1c17]' : 'text-[#5e5e48]'}`} size={24} />
-              <span className={`text-xs text-center font-semibold ${selectedRole === 'staff-1' ? 'text-[#1d1c17]' : 'text-[#1d1c17]'}`}>Mitarbeiter</span>
-            </button>
-            <button 
-              type="button"
-              onClick={() => fillDemoData('admin')}
-              className={`role-card flex flex-col items-center justify-center p-4 bg-[#f8f3eb] rounded-xl border transition-all duration-300 group
-                ${selectedRole === 'admin-1' ? 'ring-2 ring-[#5e5e48] bg-[#77775f]/20 border-transparent' : 'border-[#d8c2b9]/30 hover:border-[#5e5e48]/50 hover:bg-[#77775f]/10'}
-              `}
-            >
-              <ShieldCheck className={`mb-2 transition-transform group-hover:scale-110 ${selectedRole === 'admin-1' ? 'text-[#1d1c17]' : 'text-[#5e5e48]'}`} size={24} />
-              <span className={`text-xs text-center font-semibold ${selectedRole === 'admin-1' ? 'text-[#1d1c17]' : 'text-[#1d1c17]'}`}>Admin</span>
-            </button>
-          </div>
 
           {/* Back to Website */}
           <div className="mt-8 text-center w-full">

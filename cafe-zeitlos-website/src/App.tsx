@@ -13,6 +13,12 @@ import { Login } from './pages/public/Login';
 
 // Admin Pages
 import { AdminDashboard } from './pages/admin/AdminDashboard';
+import { AdminOrders } from './pages/admin/AdminOrders';
+import { AdminReservations } from './pages/admin/AdminReservations';
+import { AdminMenu } from './pages/admin/AdminMenu';
+import { AdminAnalytics } from './pages/admin/AdminAnalytics';
+import { AdminTeam } from './pages/admin/AdminTeam';
+import { AdminSettings } from './pages/admin/AdminSettings';
 
 // Staff Pages
 import { StaffDashboard } from './pages/staff/StaffDashboard';
@@ -41,11 +47,12 @@ export function AppRoutes() {
       <Route element={<RoleGuard allowedRoles={['admin']} />}>
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<AdminDashboard />} />
-          <Route path="orders" element={<div>Admin Orders</div>} />
-          <Route path="reservations" element={<div>Admin Reservations</div>} />
-          <Route path="menu" element={<div>Admin Menu</div>} />
-          <Route path="team" element={<div>Admin Team</div>} />
-          <Route path="settings" element={<div>Admin Settings</div>} />
+          <Route path="orders" element={<AdminOrders />} />
+          <Route path="reservations" element={<AdminReservations />} />
+          <Route path="menu" element={<AdminMenu />} />
+          <Route path="analytics" element={<AdminAnalytics />} />
+          <Route path="team" element={<AdminTeam />} />
+          <Route path="settings" element={<AdminSettings />} />
         </Route>
       </Route>
 
