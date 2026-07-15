@@ -185,7 +185,7 @@ export const Visit: React.FC = () => {
                     rel="noopener noreferrer"
                     className="inline-block mt-3 text-cafe-gold hover:text-white transition-colors underline underline-offset-4"
                   >
-                    Route planen
+                    {t('visit.route_plan')}
                   </a>
                 </div>
               </div>

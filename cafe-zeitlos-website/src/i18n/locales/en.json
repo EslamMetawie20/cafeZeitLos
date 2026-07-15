@@ -62,7 +62,8 @@
       "address": "Rebenring 47a, 38106 Braunschweig",
       "phone": "+49 531 12885768",
       "hours_title": "Opening Hours",
-      "hours_text": "Monday to Sunday, 09:00 AM – 08:00 PM"
+      "hours_text": "Monday to Sunday, 09:00 AM – 08:00 PM",
+      "route_plan": "Get Directions"
     },
     "reservation": {
       "title": "Reservation Request",
