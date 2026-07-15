@@ -10,28 +10,28 @@ export const Hero: React.FC = () => {
   const { t } = useTranslation();
   return (
     <section id="home-hero" className="relative min-h-[100svh] flex flex-col justify-center pt-20 md:pt-24 pb-10 md:pb-16 overflow-hidden">
-      <div className="container mx-auto px-4 md:px-6 flex-1 flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+      <div className="container mx-auto px-4 md:px-6 flex-1 flex flex-col lg:flex-row items-center gap-6 lg:gap-20">
         
         {/* Text Content */}
         <motion.div 
-          className="flex-1 w-full flex flex-col items-start"
+          className="flex-grow-0 lg:flex-1 w-full flex flex-col items-start"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
 
           
-          <h1 className="font-heading text-[clamp(2.25rem,8vw,5.5rem)] font-bold leading-[1.1] mb-6 text-cafe-espresso">
+          <h1 className="font-heading text-[clamp(2.25rem,8vw,5.5rem)] font-bold leading-[1.1] mb-4 md:mb-6 text-cafe-espresso">
             {t('hero.title_line1')}<br />
             {t('hero.title_line2')}<br />
             {t('hero.title_line3')}
           </h1>
           
-          <p className="text-base md:text-xl text-cafe-text opacity-90 max-w-lg mb-8 text-balance">
+          <p className="text-base md:text-xl text-cafe-text opacity-90 max-w-lg mb-4 md:mb-8 text-balance">
             {t('hero.description')}
           </p>
           
-          <div className="flex flex-col sm:flex-row w-full sm:w-auto gap-4 mb-10">
+          <div className="flex flex-col sm:flex-row w-full sm:w-auto gap-3 md:gap-4 mb-6 md:mb-10">
             <Button 
               size="lg" 
               onClick={() => {
@@ -70,7 +70,7 @@ export const Hero: React.FC = () => {
             </Button>
           </div>
 
-          <div className="flex flex-col gap-2 text-sm font-medium text-cafe-text/80">
+          <div className="flex flex-col gap-1.5 md:gap-2 text-sm font-medium text-cafe-text/80">
             <div className="flex items-center gap-2">
               <MapPin size={18} className="text-cafe-terracotta" />
               <span>{t('hero.address')}</span>
@@ -79,8 +79,8 @@ export const Hero: React.FC = () => {
               <span className="w-1.5 h-1.5 rounded-full bg-cafe-terracotta ml-1.5 mr-1"></span>
               <span>{t('hero.hours')}</span>
             </div>
-            <div className="flex items-center gap-2 mt-2">
-              <span className="px-2 py-1 rounded-md bg-cafe-gold/10 text-cafe-gold border border-cafe-gold/20 text-xs">
+            <div className="flex items-center gap-2 mt-1 md:mt-2">
+              <span className="px-2 py-0.5 md:py-1 rounded-md bg-cafe-gold/10 text-cafe-gold border border-cafe-gold/20 text-xs">
                 {t('hero.halal')}
               </span>
             </div>
@@ -89,7 +89,7 @@ export const Hero: React.FC = () => {
 
         {/* Hero Image */}
         <motion.div 
-          className="flex-1 w-full max-w-xl lg:max-w-none relative aspect-[4/3] lg:aspect-square group z-0 mt-4 lg:mt-0"
+          className="w-full max-w-md lg:max-w-none relative h-48 sm:h-64 lg:h-auto lg:flex-1 aspect-[4/3] lg:aspect-square group z-0 mt-4 lg:mt-0"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
